@@ -1,0 +1,454 @@
+{
+  "name": "pgsql",
+  "displayName": "pgsql",
+  "version": "1.2.1",
+  "description": "Develop PGSQL everywhere",
+  "publisher": "ms-pgsql",
+  "preview": false,
+  "license": "",
+  "aiKey": "AIF-5574968e-856d-40d2-af67-c89a14e76412",
+  "icon": "",
+  "galleryBanner": {
+    "color": "#2F2F2F",
+    "theme": "dark"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Microsoft/vscode-pgsql.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Microsoft/vscode-pgsql/issues"
+  },
+  "homepage": "https://github.com/Microsoft/vscode-pgsql/blob/master/README.md",
+  "engines": {
+    "vscode": "^1.17.0"
+  },
+  "categories": [
+    "Languages",
+    "Azure"
+  ],
+  "keywords": [
+    "SQL",
+    "PGSQL",
+    "PG",
+    "PosgreSQL"
+  ],
+  "activationEvents": [
+    "onLanguage:sql",
+    "onCommand:extension.pgsql.connect",
+    "onCommand:extension.pgsql.runQuery",
+    "onCommand:extension.pgsql.runCurrentStatement",
+    "onCommand:extension.pgsql.disconnect",
+    "onCommand:extension.pgsql.manageProfiles",
+    "onCommand:extension.pgsql.chooseDatabase",
+    "onCommand:extension.pgsql.cancelQuery",
+    "onCommand:extension.pgsql.showGettingStarted",
+    "onCommand:extension.pgsql.newQuery",
+    "onCommand:extension.pgsql.rebuildIntelliSenseCache"
+  ],
+  "main": "./out/src/extension",
+  "extensionDependencies": [
+    "vscode.sql"
+  ],
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "coveralls": "^2.11.15",
+    "decache": "^4.1.0",
+    "del": "^2.2.1",
+    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-clean-css": "^2.0.13",
+    "gulp-concat": "^2.6.0",
+    "gulp-filter": "^5.0.0",
+    "gulp-install": "^0.6.0",
+    "gulp-istanbul-report": "0.0.1",
+    "gulp-json-editor": "^2.2.1",
+    "gulp-remote-src": "0.4.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-shell": "^0.5.2",
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-tslint": "^6.0.2",
+    "gulp-typescript": "^3.1.4",
+    "gulp-uglify": "^2.0.0",
+    "istanbul": "^0.4.5",
+    "jasmine-core": "~2.4.1",
+    "karma": "^1.3.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "karma-coverage": "^1.1.1",
+    "karma-htmlfile-reporter": "^0.3.4",
+    "karma-jasmine": "^1.0.2",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "karma-junit-reporter": "^1.1.0",
+    "karma-remap-istanbul": "^0.2.1",
+    "pm-mocha-jenkins-reporter": "^0.2.6",
+    "remap-istanbul": "^0.6.4",
+    "systemjs-builder": "^0.15.32",
+    "tslint": "^3.14.0",
+    "typemoq": "^1.7.0",
+    "typescript": "2.3.4",
+    "uglify-js": "mishoo/UglifyJS2#harmony-v2.8.22",
+    "vscode": "^1.0.5",
+    "vscode-nls-dev": "https://github.com/Raymondd/vscode-nls-dev/releases/download/2.0.2/build.tar.gz",
+    "xmldom": "^0.1.27",
+    "yargs": "https://registry.npmjs.org/yargs/-/yargs-3.32.0.tgz"
+  },
+  "dependencies": {
+    "applicationinsights": "^0.15.9",
+    "body-parser": "^1.15.2",
+    "comment-json": "^1.1.3",
+    "copy-paste": "^1.3.0",
+    "decompress": "^4.0.0",
+    "ejs": "^2.4.2",
+    "error-ex": "^1.3.0",
+    "express": "^4.13.3",
+    "figures": "^1.4.0",
+    "fs-extra-promise": "^0.3.1",
+    "getmac": "1.2.1",
+    "http-proxy-agent": "^1.0.0",
+    "https-proxy-agent": "^1.0.0",
+    "jsonc-parser": "^1.0.0",
+    "opener": "1.4.2",
+    "plist": "^2.1.0",
+    "pretty-data": "^0.40.0",
+    "request": "^2.73.0",
+    "semver": "https://registry.npmjs.org/semver/-/semver-5.0.3.tgz",
+    "tmp": "^0.0.28",
+    "underscore": "^1.8.3",
+    "vscode-extension-telemetry": "^0.0.5",
+    "vscode-languageclient": "^2.5.0",
+    "vscode-nls": "^2.0.2",
+    "ws": "^1.1.1"
+  },
+  "contributes": {
+    "languages": [
+      {
+        "id": "sql",
+        "extensions": [
+          ".sql"
+        ],
+        "aliases": [
+          "SQL"
+        ],
+        "configuration": "./syntaxes/sql.configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "sql",
+        "scopeName": "source.sql",
+        "path": "./syntaxes/SQL.plist"
+      }
+    ],
+    "outputChannels": [
+      "PGSQL"
+    ],
+    "snippets": [
+      {
+        "language": "sql",
+        "path": "./snippets/pgsql.json"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "extension.pgsql.runQuery",
+          "when": "editorLangId == sql"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "extension.pgsql.runQuery",
+        "title": "%extension.pgsql.runQuery%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.runCurrentStatement",
+        "title": "%extension.pgsql.runCurrentStatement%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.cancelQuery",
+        "title": "%extension.pgsql.cancelQuery%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.connect",
+        "title": "%extension.pgsql.connect%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.disconnect",
+        "title": "%extension.pgsql.disconnect%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.manageProfiles",
+        "title": "%extension.pgsql.manageProfiles%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.chooseDatabase",
+        "title": "%extension.pgsql.chooseDatabase%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.chooseLanguageFlavor",
+        "title": "%extension.pgsql.chooseLanguageFlavor%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.showGettingStarted",
+        "title": "%extension.pgsql.showGettingStarted%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.newQuery",
+        "title": "%extension.pgsql.newQuery%",
+        "category": "PG SQL"
+      },
+      {
+        "command": "extension.pgsql.rebuildIntelliSenseCache",
+        "title": "%extension.pgsql.rebuildIntelliSenseCache%",
+        "category": "PG SQL"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "extension.pgsql.runQuery",
+        "key": "ctrl+shift+e",
+        "mac": "cmd+shift+e",
+        "when": "editorTextFocus && editorLangId == 'sql'"
+      },
+      {
+        "command": "extension.pgsql.connect",
+        "key": "ctrl+shift+c",
+        "mac": "cmd+shift+c",
+        "when": "editorTextFocus && editorLangId == 'sql'"
+      },
+      {
+        "command": "extension.pgsql.disconnect",
+        "key": "ctrl+shift+d",
+        "mac": "cmd+shift+d",
+        "when": "editorTextFocus && editorLangId == 'sql'"
+      }
+    ],
+    "configuration": {
+      "type": "object",
+      "title": "PGSQL configuration",
+      "properties": {
+        "pgsql.logDebugInfo": {
+          "type": "boolean",
+          "default": false,
+          "description": "%pgsql.logDebugInfo%",
+          "scope": "window"
+        },
+        "pgsql.maxRecentConnections": {
+          "type": "number",
+          "default": 5,
+          "description": "%pgsql.maxRecentConnections%",
+          "scope": "window"
+        },
+        "pgsql.connections": {
+          "type": "array",
+          "default": [
+            {
+              "server": "{{put-server-name-here}}",
+              "database": "{{put-database-name-here}}",
+              "user": "{{put-username-here}}",
+              "password": "{{put-password-here}}"
+            }
+          ],
+          "description": "%pgsql.connections%",
+          "items": {
+            "type": "object",
+            "properties": {
+              "host": {
+                "type": "string",
+                "default": "{{put-server-name-here}}",
+                "description": "%pgsql.connection.server%"
+              },
+              "dbname": {
+                "type": "string",
+                "default": "{{put-database-name-here}}",
+                "description": "%pgsql.connection.database%"
+              },
+              "user": {
+                "type": "string",
+                "default": "{{put-username-here}}",
+                "description": "%pgsql.connection.user%"
+              },
+              "password": {
+                "type": "string",
+                "default": "{{put-password-here}}",
+                "description": "%pgsql.connection.password%"
+              },
+              "emptyPasswordInput": {
+                "type": "boolean",
+                "description": "%pgsql.connection.emptyPasswordInput%"
+              }
+            }
+          },
+          "scope": "resource"
+        },
+        "pgsql.shortcuts": {
+          "type": "object",
+          "description": "%pgsql.shortcuts%",
+          "default": {
+            "_comment": "Short cuts must follow the format (ctrl)+(shift)+(alt)+[key]",
+            "event.toggleResultPane": "ctrl+alt+r",
+            "event.toggleMessagePane": "ctrl+alt+y",
+            "event.prevGrid": "ctrl+up",
+            "event.nextGrid": "ctrl+down",
+            "event.copySelection": "ctrl+c",
+            "event.copyWithHeaders": "",
+            "event.maximizeGrid": "",
+            "event.selectAll": "",
+            "event.saveAsJSON": "",
+            "event.saveAsCSV": "",
+            "event.saveAsExcel": ""
+          },
+          "scope": "resource"
+        },
+        "pgsql.messagesDefaultOpen": {
+          "type": "boolean",
+          "description": "%pgsql.messagesDefaultOpen%",
+          "default": true,
+          "scope": "resource"
+        },
+        "pgsql.resultsFontFamily": {
+          "type": "string",
+          "description": "%pgsql.resultsFontFamily%",
+          "default": "-apple-system,BlinkMacSystemFont,Segoe WPC,Segoe UI,HelveticaNeue-Light,Ubuntu,Droid Sans,sans-serif",
+          "scope": "resource"
+        },
+        "pgsql.resultsFontSize": {
+          "type": "number",
+          "description": "%pgsql.resultsFontSize%",
+          "default": 13,
+          "scope": "resource"
+        },
+        "pgsql.saveAsCsv.includeHeaders": {
+          "type": "boolean",
+          "description": "%pgsql.saveAsCsv.includeHeaders%",
+          "default": true,
+          "scope": "resource"
+        },
+        "pgsql.copyIncludeHeaders": {
+          "type": "boolean",
+          "description": "%pgsql.copyIncludeHeaders%",
+          "default": false,
+          "scope": "resource"
+        },
+        "pgsql.copyRemoveNewLine": {
+          "type": "boolean",
+          "description": "%pgsql.copyRemoveNewLine%",
+          "default": true,
+          "scope": "resource"
+        },
+        "pgsql.showBatchTime": {
+          "type": "boolean",
+          "description": "%pgsql.showBatchTime%",
+          "default": false,
+          "scope": "resource"
+        },
+        "pgsql.splitPaneSelection": {
+          "type": "string",
+          "description": "%pgsql.splitPaneSelection%",
+          "default": "next",
+          "enum": [
+            "next",
+            "current",
+            "end"
+          ],
+          "scope": "resource"
+        },
+        "pgsql.format.alignColumnDefinitionsInColumns": {
+          "type": "boolean",
+          "description": "%pgsql.format.alignColumnDefinitionsInColumns%",
+          "default": false,
+          "scope": "window"
+        },
+        "pgsql.format.datatypeCasing": {
+          "type": "string",
+          "description": "%pgsql.format.datatypeCasing%",
+          "default": "none",
+          "enum": [
+            "none",
+            "uppercase",
+            "lowercase"
+          ],
+          "scope": "window"
+        },
+        "pgsql.format.keywordCasing": {
+          "type": "string",
+          "description": "%pgsql.format.keywordCasing%",
+          "default": "none",
+          "enum": [
+            "none",
+            "uppercase",
+            "lowercase"
+          ],
+          "scope": "window"
+        },
+        "pgsql.format.placeCommasBeforeNextStatement": {
+          "type": "boolean",
+          "description": "%pgsql.format.placeCommasBeforeNextStatement%",
+          "default": false,
+          "scope": "window"
+        },
+        "pgsql.format.placeSelectStatementReferencesOnNewLine": {
+          "type": "boolean",
+          "description": "%pgsql.format.placeSelectStatementReferencesOnNewLine%",
+          "default": false,
+          "scope": "window"
+        },
+        "pgsql.applyLocalization": {
+          "type": "boolean",
+          "description": "%pgsql.applyLocalization%",
+          "default": false,
+          "scope": "window"
+        },
+        "pgsql.query.displayBitAsNumber": {
+          "type": "boolean",
+          "default": true,
+          "description": "%pgsql.query.displayBitAsNumber%",
+          "scope": "window"
+        },
+        "pgsql.intelliSense.enableIntelliSense": {
+          "type": "boolean",
+          "default": true,
+          "description": "%pgsql.intelliSense.enableIntelliSense%",
+          "scope": "window"
+        },
+        "pgsql.intelliSense.enableErrorChecking": {
+          "type": "boolean",
+          "default": true,
+          "description": "%pgsql.intelliSense.enableErrorChecking%",
+          "scope": "window"
+        },
+        "pgsql.intelliSense.enableSuggestions": {
+          "type": "boolean",
+          "default": true,
+          "description": "%pgsql.intelliSense.enableSuggestions%",
+          "scope": "window"
+        },
+        "pgsql.intelliSense.enableQuickInfo": {
+          "type": "boolean",
+          "default": true,
+          "description": "%pgsql.intelliSense.enableQuickInfo%",
+          "scope": "window"
+        },
+        "pgsql.intelliSense.lowerCaseSuggestions": {
+          "type": "boolean",
+          "default": false,
+          "description": "%pgsql.intelliSense.lowerCaseSuggestions%",
+          "scope": "window"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "postinstall": "node ./node_modules/vscode/bin/install",
+    "install-packages": "npm install github:gulpjs/gulp#4.0 && npm install gulp-install && gulp --gulpfile install.js install"
+  }
+}

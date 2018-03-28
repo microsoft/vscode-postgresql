@@ -1,0 +1,36 @@
+environment:
+  nodejs_version: "6.9.1"
+  # Temporary Code version due to https://github.com/Microsoft/vscode-extension-vscode/issues/64
+  CODE_VERSION: 1.17.0
+
+
+# safelist
+branches:
+  only:
+    - master
+    - dev
+
+  # Install scripts. (runs after repo cloning)
+install:
+  - choco install --ignore-checksums googlechrome
+  - set BUILDMACHINE=true
+  # Get the latest stable version of Node.js or io.js
+  - ps: Install-Product node $env:nodejs_version
+  - npm install -g npm@4
+  # show versions
+  - npm --version
+  - node --version
+  - npm install -g --silent gulp-cli
+  # install modules
+  - npm install
+  - gulp install
+
+build_script:
+  - gulp build
+
+test_script:
+  - ./node_modules/.bin/karma start
+  - node ./node_modules/vscode/bin/test
+
+on_finish:
+  - ps: scripts\upload.ps1
