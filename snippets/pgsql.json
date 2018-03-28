@@ -1,0 +1,19 @@
+{
+	"Create a new Database": {
+		"prefix": "pgCreateDatabase",
+		"body": [
+			"-- Create a new database called '${1:DatabaseName}'",
+			"CREATE DATABASE ${1:DatabaseName}"
+		],
+		"description": "Create a new PostgreSQL Database"
+	},
+	"List databases": {
+		"prefix": "pgListDatabases",
+		"body": [
+			"-- Get a list of databases",
+			"SELECT datname FROM pg_database",
+			"WHERE datistemplate = false"
+		],
+		"description": "List PostgreSQL databases"
+	}
+}
