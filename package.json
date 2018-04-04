@@ -158,47 +158,47 @@
       {
         "command": "extension.pgsql.runQuery",
         "title": "%extension.pgsql.runQuery%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.runCurrentStatement",
         "title": "%extension.pgsql.runCurrentStatement%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.cancelQuery",
         "title": "%extension.pgsql.cancelQuery%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.connect",
         "title": "%extension.pgsql.connect%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.disconnect",
         "title": "%extension.pgsql.disconnect%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.manageProfiles",
         "title": "%extension.pgsql.manageProfiles%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.chooseDatabase",
         "title": "%extension.pgsql.chooseDatabase%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.showGettingStarted",
         "title": "%extension.pgsql.showGettingStarted%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.newQuery",
         "title": "%extension.pgsql.newQuery%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       }
     ],
     "keybindings": [
