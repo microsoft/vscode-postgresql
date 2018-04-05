@@ -493,7 +493,7 @@ export default class MainController implements vscode.Disposable {
      * Shows the release notes page in the preview browser
      */
     private launchReleaseNotesPage(): void {
-        opener(Constants.changelogLink);
+        opener(Constants.releaseNotesLink);
     }
 
      /**

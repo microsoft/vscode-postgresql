@@ -54,7 +54,7 @@ export const timeToWaitForLanguageModeChange = 10000.0;
 // TODO: Update these
 export const macOpenSslHelpLink = 'https://github.com/Microsoft/vscode-pgsql/wiki/OpenSSL-Configuration';
 export const gettingStartedGuideLink = 'https://github.com/Microsoft/vscode-pgsql/blob/master/README.md';
-export const changelogLink = 'https://aka.ms/vscode-pgsql-changelog';
+export const releaseNotesLink = 'https://github.com/Microsoft/vscode-pgsql/blob/master/CHANGELOG.md';
 export const integratedAuthHelpLink = 'https://aka.ms/vscode-pgsql-integratedauth';
 export const sqlToolsServiceCrashLink = 'https://github.com/Microsoft/vscode-pgsql/wiki/SqlToolsService-Known-Issues';
 
