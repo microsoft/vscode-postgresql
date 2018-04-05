@@ -16,9 +16,9 @@ const unknown = 'unknown';
 export enum Runtime {
     UnknownRuntime = <any>'Unknown',
     UnknownVersion = <any>'Unknown',
-    Windows_7_86 = <any>'Windows_7_86',
-    Windows_7_64 = <any>'Windows_7_64',
-    OSX_10_11_64 = <any> 'OSX_10_11_64',
+    Windows_86 = <any>'Windows_86',
+    Windows_64 = <any>'Windows_64',
+    OSX = <any>'OSX',
     CentOS_7 = <any>'CentOS_7',
     Debian_8 = <any>'Debian_8',
     Fedora_23 = <any>'Fedora_23',
@@ -26,16 +26,18 @@ export enum Runtime {
     SLES_12_2 = <any>'SLES_12_2',
     RHEL_7 = <any>'RHEL_7',
     Ubuntu_14 = <any>'Ubuntu_14',
-    Ubuntu_16 = <any>'Ubuntu_16'
+    Ubuntu_16 = <any>'Ubuntu_16',
+    Linux_64 = <any>'Linux_64',
+    Linux_86 = <any>'Linux-86'
 }
 
 export function getRuntimeDisplayName(runtime: Runtime): string {
     switch (runtime) {
-        case Runtime.Windows_7_64:
+        case Runtime.Windows_64:
             return 'Windows';
-        case Runtime.Windows_7_86:
+        case Runtime.Windows_86:
             return 'Windows';
-        case Runtime.OSX_10_11_64:
+        case Runtime.OSX:
             return 'OSX';
         case Runtime.CentOS_7:
             return 'CentOS';
@@ -53,6 +55,10 @@ export function getRuntimeDisplayName(runtime: Runtime): string {
             return 'Ubuntu14';
         case Runtime.Ubuntu_16:
             return 'Ubuntu16';
+        case Runtime.Linux_64:
+            return 'Linux';
+        case Runtime.Linux_86:
+            return 'Linux';
         default:
         return 'Unknown';
     }
@@ -210,8 +216,8 @@ export class PlatformInformation {
         switch (platform) {
             case 'win32':
                 switch (architecture) {
-                    case 'x86': return Runtime.Windows_7_86;
-                    case 'x86_64': return Runtime.Windows_7_64;
+                    case 'x86': return Runtime.Windows_86;
+                    case 'x86_64': return Runtime.Windows_64;
                     default:
                 }
 
@@ -220,7 +226,7 @@ export class PlatformInformation {
             case 'darwin':
                 if (architecture === 'x86_64') {
                     // Note: We return the El Capitan RID for Sierra
-                    return Runtime.OSX_10_11_64;
+                    return Runtime.OSX;
                 }
 
                 throw new Error(`Unsupported macOS architecture: ${architecture}`);

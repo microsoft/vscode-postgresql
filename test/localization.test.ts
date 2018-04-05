@@ -22,7 +22,7 @@ suite('Localization Tests', () => {
 
     test('ES Localization Test' , done => {
         LocalizedConstants.loadLocalizedConstants('es');
-        assert.equal(LocalizedConstants.testLocalizationConstant, 'prueba');
+        assert.equal(LocalizedConstants.testLocalizationConstant, 'test');
         resetLocalization();
         done();
     });

@@ -343,7 +343,7 @@ export default class ConnectionManager {
                             opener(Constants.integratedAuthHelpLink);
                         }
                      });
-                } else if (platformInfo.runtimeId === Runtime.OSX_10_11_64 &&
+                } else if (platformInfo.runtimeId === Runtime.OSX &&
                 result.messages.indexOf('Unable to load DLL \'System.Security.Cryptography.Native\'') !== -1) {
                      this.vscodeWrapper.showErrorMessage(Utils.formatString(LocalizedConstants.msgConnectionError2,
                      LocalizedConstants.macOpenSslErrorMessage), LocalizedConstants.macOpenSslHelpButton).then(action => {

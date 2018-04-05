@@ -43,8 +43,7 @@
     "onCommand:extension.pgsql.chooseDatabase",
     "onCommand:extension.pgsql.cancelQuery",
     "onCommand:extension.pgsql.showGettingStarted",
-    "onCommand:extension.pgsql.newQuery",
-    "onCommand:extension.pgsql.rebuildIntelliSenseCache"
+    "onCommand:extension.pgsql.newQuery"
   ],
   "main": "./out/src/extension",
   "extensionDependencies": [
@@ -159,76 +158,66 @@
       {
         "command": "extension.pgsql.runQuery",
         "title": "%extension.pgsql.runQuery%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.runCurrentStatement",
         "title": "%extension.pgsql.runCurrentStatement%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.cancelQuery",
         "title": "%extension.pgsql.cancelQuery%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.connect",
         "title": "%extension.pgsql.connect%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.disconnect",
         "title": "%extension.pgsql.disconnect%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.manageProfiles",
         "title": "%extension.pgsql.manageProfiles%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.chooseDatabase",
         "title": "%extension.pgsql.chooseDatabase%",
-        "category": "PG SQL"
-      },
-      {
-        "command": "extension.pgsql.chooseLanguageFlavor",
-        "title": "%extension.pgsql.chooseLanguageFlavor%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.showGettingStarted",
         "title": "%extension.pgsql.showGettingStarted%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       },
       {
         "command": "extension.pgsql.newQuery",
         "title": "%extension.pgsql.newQuery%",
-        "category": "PG SQL"
-      },
-      {
-        "command": "extension.pgsql.rebuildIntelliSenseCache",
-        "title": "%extension.pgsql.rebuildIntelliSenseCache%",
-        "category": "PG SQL"
+        "category": "PostgreSQL"
       }
     ],
     "keybindings": [
       {
         "command": "extension.pgsql.runQuery",
-        "key": "ctrl+shift+e",
-        "mac": "cmd+shift+e",
+        "key": "ctrl+m ctrl+r",
+        "mac": "cmd+m cmd+r",
         "when": "editorTextFocus && editorLangId == 'sql'"
       },
       {
         "command": "extension.pgsql.connect",
-        "key": "ctrl+shift+c",
-        "mac": "cmd+shift+c",
+        "key": "ctrl+m ctrl+c",
+        "mac": "cmd+m cmd+c",
         "when": "editorTextFocus && editorLangId == 'sql'"
       },
       {
         "command": "extension.pgsql.disconnect",
-        "key": "ctrl+shift+d",
-        "mac": "cmd+shift+d",
+        "key": "ctrl+m ctrl+d",
+        "mac": "cmd+m cmd+d",
         "when": "editorTextFocus && editorLangId == 'sql'"
       }
     ],

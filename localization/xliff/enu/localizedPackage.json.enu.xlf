@@ -23,17 +23,11 @@
         <trans-unit id="extension.pgsql.chooseDatabase">
             <source xml:lang="en">Use Database</source>
         </trans-unit>
-        <trans-unit id="extension.pgsql.chooseLanguageFlavor">
-            <source xml:lang="en">Choose SQL handler for this file</source>
-        </trans-unit>
         <trans-unit id="extension.pgsql.showGettingStarted">
             <source xml:lang="en">Getting Started Guide</source>
         </trans-unit>
         <trans-unit id="extension.pgsql.newQuery">
             <source xml:lang="en">New Query</source>
-        </trans-unit>
-        <trans-unit id="extension.pgsql.rebuildIntelliSenseCache">
-            <source xml:lang="en">Refresh IntelliSense Cache</source>
         </trans-unit>
         <trans-unit id="pgsql.logDebugInfo">
             <source xml:lang="en">[Optional] Log debug output to the VS Code console (Help -> Toggle Developer Tools)</source>
@@ -42,19 +36,19 @@
             <source xml:lang="en">The maximum number of recently used connections to store in the connection list.</source>
         </trans-unit>
         <trans-unit id="pgsql.connections">
-            <source xml:lang="en">Connection profiles defined in 'User Settings' are shown under 'PG SQL: Connect' command in the command palette.</source>
+            <source xml:lang="en">Connection profiles defined in 'User Settings' are shown under 'PostgreSQL: Connect' command in the command palette.</source>
         </trans-unit>
         <trans-unit id="pgsql.connection.host">
-            <source xml:lang="en"><![CDATA[[Required] Specify the server name to connect to. Use 'hostname\\instance' or '<server>.database.windows.net' for Azure SQL Database.]]></source>
+            <source xml:lang="en"><![CDATA[[Required] Specify the server name to connect to. Use 'hostname instance' or '<server>.postgres.database.azure.com' for Azure Database for PostgreSQL servers.]]></source>
         </trans-unit>
         <trans-unit id="pgsql.connection.database">
-            <source xml:lang="en">[Optional] Specify the database name to connect to. If database is not specified, the default user database setting is used, typically 'master'.</source>
+            <source xml:lang="en">[Optional] Specify the database name to connect to. If database is not specified, the default user database setting is used, typically 'postgres'.</source>
         </trans-unit>
         <trans-unit id="pgsql.connection.user">
-            <source xml:lang="en">[Optional] Specify the user name for SQL Server authentication. If user name is not specified, when you connect, you will be asked again.</source>
+            <source xml:lang="en">[Optional] Specify the user name for PostgreSQL Server authentication. If user name is not specified, when you connect, you will be asked again.</source>
         </trans-unit>
         <trans-unit id="pgsql.connection.password">
-            <source xml:lang="en">[Optional] Specify the password for SQL Server authentication. If password is not specified or already saved, when you connect, you will be asked again.</source>
+            <source xml:lang="en">[Optional] Specify the password for PostgreSQL Server authentication. If password is not specified or already saved, when you connect, you will be asked again.</source>
         </trans-unit>
         <trans-unit id="pgsql.connection.profileName">
             <source xml:lang="en">[Optional] Specify a custom name for this connection profile to easily browse and search in the command palette of Visual Studio Code.</source>
