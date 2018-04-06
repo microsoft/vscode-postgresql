@@ -39,8 +39,8 @@ function createTestFailedConnectionResult(ownerUri?: string, error?: number): Co
 
 function createTestCredentials(): IConnectionCredentials {
     const creds: IConnectionCredentials = {
-        server:                         'my-server',
-        database:                       'my_db',
+        host:                           'my-server',
+        dbname:                         'my_db',
         user:                           'sa',
         password:                       '12345678',
         port:                           1234,
@@ -202,7 +202,7 @@ suite('Per File Connection Tests', () => {
         // Create two different connections using the connection manager
         let connectionCreds = createTestCredentials();
         let connectionCreds2 = createTestCredentials();
-        connectionCreds2.database = 'my_other_db';
+        connectionCreds2.dbname = 'my_other_db';
 
         manager.connect(testFile1, connectionCreds).then( result => {
             assert.equal(result, true);
@@ -243,7 +243,7 @@ suite('Per File Connection Tests', () => {
         // Create two different connections using the connection manager
         let connectionCreds = createTestCredentials();
         let connectionCreds2 = createTestCredentials();
-        connectionCreds2.database = 'my_other_db';
+        connectionCreds2.dbname = 'my_other_db';
 
         manager.connect(testFile1, connectionCreds).then( result => {
             assert.equal(result, true);
@@ -297,7 +297,7 @@ suite('Per File Connection Tests', () => {
         // Create two different connections using the connection manager
         let connectionCreds = createTestCredentials();
         let connectionCreds2 = createTestCredentials();
-        connectionCreds2.database = 'my_other_db';
+        connectionCreds2.dbname = 'my_other_db';
 
         manager.connect(testFile1, connectionCreds).then( result => {
             assert.equal(result, true);
@@ -360,7 +360,7 @@ suite('Per File Connection Tests', () => {
                             .returns(() => Promise.resolve(createTestListDatabasesResult()));
 
         let newDatabaseCredentials = createTestCredentials();
-        newDatabaseCredentials.database = 'master';
+        newDatabaseCredentials.dbname = 'master';
 
         const newDatabaseChoice = <Interfaces.IConnectionCredentialsQuickPickItem> {
             label: 'master',
@@ -388,7 +388,7 @@ suite('Per File Connection Tests', () => {
 
             // Check that the connection was established
             assert.equal(manager.isConnected(testFile), true);
-            assert.equal(manager.getConnectionInfo(testFile).credentials.database, connectionCreds.database);
+            assert.equal(manager.getConnectionInfo(testFile).credentials.dbname, connectionCreds.dbname);
 
             // Change databases
             manager.onChooseDatabase().then( result2 => {
@@ -401,7 +401,7 @@ suite('Per File Connection Tests', () => {
 
                 // Check that the database was changed
                 assert.equal(manager.isConnected(testFile), true);
-                assert.equal(manager.getConnectionInfo(testFile).credentials.database, 'master');
+                assert.equal(manager.getConnectionInfo(testFile).credentials.dbname, 'master');
 
                 done();
             }).catch(err => {
@@ -430,7 +430,7 @@ suite('Per File Connection Tests', () => {
                             .returns(() => Promise.resolve(createTestListDatabasesResult()));
 
         let newDatabaseCredentials = createTestCredentials();
-        newDatabaseCredentials.database = 'master';
+        newDatabaseCredentials.dbname = 'master';
 
         let vscodeWrapperMock: TypeMoq.IMock<VscodeWrapper> = TypeMoq.Mock.ofType(VscodeWrapper);
         vscodeWrapperMock.callBase = true;
@@ -454,7 +454,7 @@ suite('Per File Connection Tests', () => {
 
             // Check that the connection was established
             assert.equal(manager.isConnected(testFile), true);
-            assert.equal(manager.getConnectionInfo(testFile).credentials.database, connectionCreds.database);
+            assert.equal(manager.getConnectionInfo(testFile).credentials.dbname, connectionCreds.dbname);
 
             // Change databases
             manager.onChooseDatabase().then( result2 => {
@@ -519,13 +519,13 @@ suite('Per File Connection Tests', () => {
 
             // Check that the connection was established
             assert.equal(connectionManager.isConnected(testFile), true);
-            assert.equal(connectionManager.getConnectionInfo(testFile).credentials.database, connectionCreds.database);
+            assert.equal(connectionManager.getConnectionInfo(testFile).credentials.dbname, connectionCreds.dbname);
 
             // Simulate a connection changed notification
             let parameters = new ConnectionContracts.ConnectionChangedParams();
             parameters.ownerUri = testFile;
             parameters.connection = new ConnectionContracts.ConnectionSummary();
-            parameters.connection.serverName = connectionCreds.server;
+            parameters.connection.serverName = connectionCreds.host;
             parameters.connection.databaseName = 'myOtherDatabase';
             parameters.connection.userName = connectionCreds.user;
 
@@ -533,7 +533,7 @@ suite('Per File Connection Tests', () => {
             notificationObject.call(connectionManager, parameters);
 
             // Verify that the connection changed to the other database for the file
-            assert.equal(connectionManager.getConnectionInfo(testFile).credentials.database, 'myOtherDatabase');
+            assert.equal(connectionManager.getConnectionInfo(testFile).credentials.dbname, 'myOtherDatabase');
 
             done();
         });
@@ -547,7 +547,7 @@ suite('Per File Connection Tests', () => {
 
         // Given a connection to default database
         let connectionCreds = createTestCredentials();
-        connectionCreds.database = '';
+        connectionCreds.dbname = '';
 
         // When the result will return 'master' as the database connected to
         let myResult = createConnectionResultForCreds(connectionCreds, expectedDbName);
@@ -564,7 +564,7 @@ suite('Per File Connection Tests', () => {
         let actualDbName = undefined;
         statusViewMock.setup(x => x.connectSuccess(TypeMoq.It.isAny(), TypeMoq.It.isAny(), TypeMoq.It.isAny()))
         .callback((fileUri, creds: IConnectionCredentials, server: ConnectionContracts.ServerInfo) => {
-            actualDbName = creds.database;
+            actualDbName = creds.dbname;
         });
 
         manager.client = serviceClientMock.object;
@@ -573,7 +573,7 @@ suite('Per File Connection Tests', () => {
         // Then on connecting expect 'master' to be the database used in status view and URI mapping
         manager.connect(testFile, connectionCreds).then( result => {
             assert.equal(result, true);
-            assert.equal(manager.getConnectionInfo(testFile).credentials.database, expectedDbName);
+            assert.equal(manager.getConnectionInfo(testFile).credentials.dbname, expectedDbName);
             assert.equal(actualDbName, expectedDbName);
 
             done();
@@ -585,12 +585,12 @@ suite('Per File Connection Tests', () => {
     function createConnectionResultForCreds(connectionCreds: IConnectionCredentials, dbName?: string): ConnectionContracts.ConnectionCompleteParams {
         let myResult = new ConnectionContracts.ConnectionCompleteParams();
         if (!dbName) {
-            dbName = connectionCreds.database;
+            dbName = connectionCreds.dbname;
         }
         myResult.connectionId = Utils.generateGuid();
         myResult.messages = '';
         myResult.connectionSummary = {
-            serverName: connectionCreds.server,
+            serverName: connectionCreds.host,
             databaseName: dbName,
             userName: connectionCreds.user
         };
@@ -606,7 +606,7 @@ suite('Per File Connection Tests', () => {
 
         // Given a connection to default database
         let connectionCreds = createTestCredentials();
-        connectionCreds.database = '';
+        connectionCreds.dbname = '';
 
         // When the result will return 'master' as the database connected to
         let myResult = createConnectionResultForCreds(connectionCreds, expectedDbName);
@@ -623,7 +623,7 @@ suite('Per File Connection Tests', () => {
         let actualDbName = undefined;
         statusViewMock.setup(x => x.connectSuccess(TypeMoq.It.isAny(), TypeMoq.It.isAny(), TypeMoq.It.isAny()))
         .callback((fileUri, creds: IConnectionCredentials) => {
-            actualDbName = creds.database;
+            actualDbName = creds.dbname;
         });
 
         // And we store any DBs saved to recent connections
@@ -642,7 +642,7 @@ suite('Per File Connection Tests', () => {
         manager.connect(testFile, connectionCreds).then( result => {
             assert.equal(result, true);
             connectionStoreMock.verify(x => x.addRecentlyUsed(TypeMoq.It.isAny()), TypeMoq.Times.once());
-            assert.equal(savedConnection.database, expectedDbName, 'Expect actual DB name returned from connection to be saved');
+            assert.equal(savedConnection.dbname, expectedDbName, 'Expect actual DB name returned from connection to be saved');
             assert.equal(savedConnection.password, connectionCreds.password, 'Expect password to be saved');
 
             done();

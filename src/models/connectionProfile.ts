@@ -56,7 +56,7 @@ export class ConnectionProfile extends ConnectionCredentials implements IConnect
 
     // Assumption: having connection string or server + profile name indicates all requirements were met
     private isValidProfile(): boolean {
-        return utils.isNotEmpty(this.server)
+        return utils.isNotEmpty(this.host)
                     && utils.isNotEmpty(this.user);
     }
 }

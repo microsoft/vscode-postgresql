@@ -254,12 +254,12 @@
               "host": {
                 "type": "string",
                 "default": "{{put-server-name-here}}",
-                "description": "%pgsql.connection.server%"
+                "description": "%pgsql.connection.host%"
               },
               "dbname": {
                 "type": "string",
                 "default": "{{put-database-name-here}}",
-                "description": "%pgsql.connection.database%"
+                "description": "%pgsql.connection.dbname%"
               },
               "user": {
                 "type": "string",
@@ -274,6 +274,11 @@
               "emptyPasswordInput": {
                 "type": "boolean",
                 "description": "%pgsql.connection.emptyPasswordInput%"
+              },
+              "port": {
+                "type": "string",
+                "default": "{{put-port-here}}",
+                "description": "%pgsql.connection.port%"
               }
             }
           },

@@ -8,8 +8,8 @@ import { QuestionTypes, IQuestion, IPrompter, INameValueChoice } from '../prompt
 
 // Concrete implementation of the IConnectionCredentials interface
 export class ConnectionCredentials implements IConnectionCredentials {
-    public server: string;
-    public database: string;
+    public host: string;
+    public dbname: string;
     public user: string;
     public password: string;
     public port: number;
@@ -43,12 +43,12 @@ export class ConnectionCredentials implements IConnectionCredentials {
     public static createConnectionDetails(credentials: IConnectionCredentials): ConnectionDetails {
         let details: ConnectionDetails = new ConnectionDetails();
 
-        details.options['host'] = credentials.server;
+        details.options['host'] = credentials.host;
         if (credentials.port && details.options['host'].indexOf(',') === -1) {
             // Port is appended to the server name in a connection string
             details.options['host'] += (',' + credentials.port);
         }
-        details.options['dbname'] = credentials.database;
+        details.options['dbname'] = credentials.dbname;
         details.options['user'] = credentials.user;
         details.options['password'] = credentials.password;
 
@@ -112,8 +112,8 @@ export class ConnectionCredentials implements IConnectionCredentials {
                 name: LocalizedConstants.serverPrompt,
                 message: LocalizedConstants.serverPrompt,
                 placeHolder: LocalizedConstants.serverPlaceholder,
-                default: defaultProfileValues ? defaultProfileValues.server : undefined,
-                shouldPrompt: (answers) => utils.isEmpty(credentials.server),
+                default: defaultProfileValues ? defaultProfileValues.host : undefined,
+                shouldPrompt: (answers) => utils.isEmpty(credentials.host),
                 validate: (value) => ConnectionCredentials.validateRequiredString(LocalizedConstants.serverPrompt, value),
                 onAnswered: (value) => ConnectionCredentials.processServerOrConnectionString(value, credentials)
             },
@@ -123,9 +123,9 @@ export class ConnectionCredentials implements IConnectionCredentials {
                 name: LocalizedConstants.databasePrompt,
                 message: LocalizedConstants.databasePrompt,
                 placeHolder: LocalizedConstants.databasePlaceholder,
-                default: defaultProfileValues ? defaultProfileValues.database : undefined,
+                default: defaultProfileValues ? defaultProfileValues.dbname : undefined,
                 shouldPrompt: (answers) => !connectionStringSet() && promptForDbName,
-                onAnswered: (value) => credentials.database = value
+                onAnswered: (value) => credentials.dbname = value
             },
             // Username must be present
             {
@@ -170,7 +170,7 @@ export class ConnectionCredentials implements IConnectionCredentials {
         if (isConnectionString) {
             credentials.connectionString = value;
         } else {
-            credentials.server = value;
+            credentials.host = value;
         }
     }
 

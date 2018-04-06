@@ -242,8 +242,8 @@ export default class ConnectionManager {
         return (event: ConnectionContracts.ConnectionChangedParams): void => {
             if (self.isConnected(event.ownerUri)) {
                 let connectionInfo: ConnectionInfo = self._connections[event.ownerUri];
-                connectionInfo.credentials.server = event.connection.serverName;
-                connectionInfo.credentials.database = event.connection.databaseName;
+                connectionInfo.credentials.host = event.connection.serverName;
+                connectionInfo.credentials.dbname = event.connection.databaseName;
                 connectionInfo.credentials.user = event.connection.userName;
 
                 self._statusView.connectSuccess(event.ownerUri, connectionInfo.credentials, connectionInfo.serverInfo);
@@ -275,7 +275,7 @@ export default class ConnectionManager {
                 let newCredentials: Interfaces.IConnectionCredentials = <any>{};
                 Object.assign<Interfaces.IConnectionCredentials, Interfaces.IConnectionCredentials>(newCredentials, connection.credentials);
                 if (result.connectionSummary && result.connectionSummary.databaseName) {
-                    newCredentials.database = result.connectionSummary.databaseName;
+                    newCredentials.dbname = result.connectionSummary.databaseName;
                 }
 
                 self.handleConnectionSuccess(fileUri, connection, newCredentials, result);
@@ -303,7 +303,7 @@ export default class ConnectionManager {
         this.statusView.languageServiceStatusChanged(fileUri, LocalizedConstants.updatingIntelliSenseStatus);
 
         this._vscodeWrapper.logToOutputChannel(
-            Utils.formatString(LocalizedConstants.msgConnectedServerInfo, connection.credentials.server, fileUri, JSON.stringify(connection.serverInfo))
+            Utils.formatString(LocalizedConstants.msgConnectedServerInfo, connection.credentials.host, fileUri, JSON.stringify(connection.serverInfo))
         );
 
         connection.extensionTimer.end();
@@ -361,7 +361,7 @@ export default class ConnectionManager {
         this.vscodeWrapper.logToOutputChannel(
             Utils.formatString(
                 LocalizedConstants.msgConnectionFailed,
-                connection.credentials.server,
+                connection.credentials.host,
                 result.errorMessage ? result.errorMessage : result.messages)
         );
     }
@@ -407,7 +407,7 @@ export default class ConnectionManager {
                 self.connectionUI.showDatabasesOnCurrentServer(self._connections[fileUri].credentials, result.databaseNames).then( newDatabaseCredentials => {
                     if (newDatabaseCredentials) {
                         self.vscodeWrapper.logToOutputChannel(
-                            Utils.formatString(LocalizedConstants.msgChangingDatabase, newDatabaseCredentials.database, newDatabaseCredentials.server, fileUri)
+                            Utils.formatString(LocalizedConstants.msgChangingDatabase, newDatabaseCredentials.dbname, newDatabaseCredentials.host, fileUri)
                         );
 
                         self.disconnect(fileUri).then( () => {
@@ -417,8 +417,8 @@ export default class ConnectionManager {
                                 self.vscodeWrapper.logToOutputChannel(
                                     Utils.formatString(
                                         LocalizedConstants.msgChangedDatabase,
-                                        newDatabaseCredentials.database,
-                                        newDatabaseCredentials.server, fileUri)
+                                        newDatabaseCredentials.dbname,
+                                        newDatabaseCredentials.host, fileUri)
                                 );
                                 resolve(true);
                             }).catch(err => {
@@ -600,7 +600,7 @@ export default class ConnectionManager {
                 self.statusView.languageFlavorChanged(fileUri, Constants.pgsqlProviderName);
             }
             self.vscodeWrapper.logToOutputChannel(
-                Utils.formatString(LocalizedConstants.msgConnecting, connectionCreds.server, fileUri)
+                Utils.formatString(LocalizedConstants.msgConnecting, connectionCreds.host, fileUri)
             );
 
             // Setup the handler for the connection complete notification to call

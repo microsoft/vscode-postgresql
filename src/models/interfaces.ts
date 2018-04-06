@@ -55,12 +55,12 @@ export interface IConnectionCredentials {
     /**
      * server name
      */
-    server: string;
+    host: string;
 
     /**
      * database name
      */
-    database: string;
+    dbname: string;
 
     /**
      * user name
