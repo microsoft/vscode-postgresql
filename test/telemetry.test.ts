@@ -5,7 +5,7 @@ import Telemetry from '../src/models/telemetry';
 suite('Telemetry Tests', () => {
     test('Correct version of applicationInsights is installed', () => {
         // Find the path of our extension
-        let ext = vscode.extensions.getExtension('ms-pgsql.pgsql');
+        let ext = vscode.extensions.getExtension('Microsoft.vscode-pgsql');
 
         // Open the applicationInsights node module package.json
         const appInsightsPackage: any = require(
@@ -29,7 +29,7 @@ suite('Telemetry Tests', () => {
     });
 
     test('Path before /out/ is stripped', () => {
-        let errorString = '/User/myuser/vscode/extensions/ms-pgsql.pgsql-0.1.5/out/src/controller/mainController.js:216.45';
+        let errorString = '/User/myuser/vscode/extensions/Microsoft.vscode-pgsql-0.0.1/out/src/controller/mainController.js:216.45';
         let expectedErrorString = 'src/controller/mainController.js:216.45';
         let actualErrorString = Telemetry.FilterErrorPath(errorString);
         assert.equal(actualErrorString, expectedErrorString);

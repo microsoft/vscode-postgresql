@@ -13,8 +13,8 @@ function ensureExtensionIsActive(): Promise<any> {
 }
 
 function waitForExtensionToBeActive(resolve): void {
-    if (typeof(vscode.extensions.getExtension('ms-pgsql.pgsql')) === 'undefined' ||
-        !vscode.extensions.getExtension('ms-pgsql.pgsql').isActive) {
+    if (typeof(vscode.extensions.getExtension('Microsoft.vscode-pgsql')) === 'undefined' ||
+        !vscode.extensions.getExtension('Microsoft.vscode-pgsql').isActive) {
         setTimeout(waitForExtensionToBeActive.bind(this, resolve), 50);
     } else {
         resolve();
