@@ -279,6 +279,71 @@
                 "type": "string",
                 "default": "{{put-port-here}}",
                 "description": "%pgsql.connection.port%"
+              },
+              "hostaddr": {
+                "type": "string",
+                "default": "{{put-hostaddr-here}}",
+                "description": "%pgsql.connection.hostaddr%"
+              },
+              "connectTimeout": {
+                "type": "number",
+                "default": "15",
+                "description": "%pgsql.connection.connectTimeout%"
+              },
+              "clientEncoding": {
+                "type": "string",
+                "default": "{{put-clientEncoding-here}}",
+                "description": "%pgsql.connection.clientEncoding%"
+              },
+              "options": {
+                "type": "string",
+                "default": "{{put-Command-line options-here}}",
+                "description": "%pgsql.connection.options%"
+              },
+              "applicationName": {
+                "type": "string",
+                "default": "{{put-applicationName-here}}",
+                "description": "%pgsql.connection.applicationName%"
+              },
+              "sslmode": {
+                "type": "string",
+                "default": "prefer",
+                "description": "%pgsql.connection.sslmode%"
+              },
+              "sslcompression": {
+                "type": "boolean",
+                "default": "{{put-sslcompression-here}}",
+                "description": "%pgsql.connection.sslcompression%"
+              },
+              "sslcert": {
+                "type": "boolean",
+                "default": "{{put-sslcert-here}}",
+                "description": "%pgsql.connection.sslcert%"
+              },
+              "sslkey": {
+                "type": "string",
+                "default": "{{put-sslkey-here}}",
+                "description": "%pgsql.connection.sslkey%"
+              },
+              "sslrootcert": {
+                "type": "string",
+                "default": "{{put-sslrootcert-here}}",
+                "description": "%pgsql.connection.sslrootcert%"
+              },
+              "sslcrl": {
+                "type": "string",
+                "default": "{{put-sslcrl-here}}",
+                "description": "%pgsql.connection.sslcrl%"
+              },
+              "requirepeer": {
+                "type": "string",
+                "default": "{{put-requirepeer-here}}",
+                "description": "%pgsql.connection.requirepeer%"
+              },
+              "service": {
+                "type": "string",
+                "default": "{{put-service-here}}",
+                "description": "%pgsql.connection.service%"
               }
             }
           },
