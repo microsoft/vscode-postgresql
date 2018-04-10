@@ -1,13 +1,13 @@
 {
-  "name": "pgsql",
-  "displayName": "pgsql",
-  "version": "1.2.1",
-  "description": "Develop PGSQL everywhere",
-  "publisher": "ms-pgsql",
-  "preview": false,
+  "name": "vscode-pgsql",
+  "displayName": "vscode-pgsql",
+  "version": "0.0.1",
+  "description": "Develop PostgreSQL everywhere",
+  "publisher": "Microsoft",
+  "preview": true,
   "license": "",
   "aiKey": "AIF-5574968e-856d-40d2-af67-c89a14e76412",
-  "icon": "",
+  "icon": "images/extension-icon.png",
   "galleryBanner": {
     "color": "#2F2F2F",
     "theme": "dark"
@@ -230,6 +230,29 @@
           "default": false,
           "description": "%pgsql.logDebugInfo%",
           "scope": "window"
+        },
+        "pgsql.debugSourcePath": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "default": null,
+          "description": "[Optional] Path to the source directory of the PostgreSQL Tools Service, for debugging"
+        },
+        "pgsql.useDebugSource": {
+          "type": "boolean",
+          "default": false,
+          "description": "[Optional] Enable running the PGSQL extension via the path set in pgsql.debugSourcePath"
+        },
+        "pgsql.enableStartupDebugging": {
+          "type": "boolean",
+          "default": false,
+          "description": "[Optional] Whether to make the PostgreSQL Tools Service wait for a debugger to attach when starting"
+        },
+        "pgsql.debugServerPort": {
+          "type": "number",
+          "default": 3000,
+          "description": "[Optional] The port to run the PostgreSQL Tools Service remote debugger on (default 3000)"
         },
         "pgsql.maxRecentConnections": {
           "type": "number",

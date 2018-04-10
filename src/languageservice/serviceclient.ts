@@ -4,6 +4,9 @@
  * ------------------------------------------------------------------------------------------ */
 'use strict';
 
+import * as path from 'path';
+import * as os from 'os';
+
 import { ExtensionContext, workspace, window, OutputChannel, languages } from 'vscode';
 import { LanguageClient, LanguageClientOptions, ServerOptions,
     TransportKind, RequestType, NotificationType, NotificationHandler,
@@ -313,21 +316,36 @@ export default class SqlToolsServiceClient {
     private createServerOptions(servicePath): ServerOptions {
         let serverArgs = [];
         let serverCommand: string = servicePath;
-        if (servicePath.endsWith('.dll')) {
-            serverArgs = [servicePath];
-            serverCommand = 'dotnet';
-        }
 
-        // Get the extenion's configuration
         let config = workspace.getConfiguration(Constants.extensionConfigSectionName);
+
         if (config) {
+            // Override the server path with the local debug path if enabled
+
+            let useLocalSource = config['useDebugSource'];
+            if (useLocalSource) {
+                let localSourcePath = config['debugSourcePath'];
+                let filePath = path.join(localSourcePath, 'pgsqltoolsservice/pgtoolsservice_main.py');
+                process.env.PYTHONPATH = localSourcePath;
+                serverCommand = process.platform === 'win32' ? 'python' : 'python3';
+
+                let enableStartupDebugging = config['enableStartupDebugging'];
+                let debuggingArg = enableStartupDebugging ? '--enable-remote-debugging-wait' : '--enable-remote-debugging';
+                let debugPort = config['debugServerPort'];
+                debuggingArg += '=' + debugPort;
+                serverArgs = [filePath, debuggingArg];
+            }
+
+            let logFileLocation = path.join(this.getDefaultLogLocation(), 'pgsql');
+
+            serverArgs.push('--log-dir=' + logFileLocation);
+            serverArgs.push(logFileLocation);
+
             // Enable diagnostic logging in the service if it is configured
-            let logDebugInfo = config[Constants.configLogDebugInfo];
+            let logDebugInfo = config['logDebugInfo'];
             if (logDebugInfo) {
                 serverArgs.push('--enable-logging');
             }
-
-            // Send Locale for sqltoolsservice localization
             let applyLocalization = config[Constants.configApplyLocalization];
             if (applyLocalization) {
                 let locale = vscode.env.language;
@@ -336,10 +354,8 @@ export default class SqlToolsServiceClient {
             }
         }
 
-
-        // run the service host using dotnet.exe from the path
-        let serverOptions: ServerOptions = {  command: serverCommand, args: serverArgs, transport: TransportKind.stdio  };
-        return serverOptions;
+        // run the service host
+        return  {  command: serverCommand, args: serverArgs, transport: TransportKind.stdio  };
     }
 
     /**
@@ -383,5 +399,21 @@ export default class SqlToolsServiceClient {
                 resolve(true);
             });
         });
+    }
+
+    // The function is a duplicate of \src\paths.js. IT would be better to import path.js but it doesn't
+    // work for now because the extension is running in different process.
+    private getAppDataPath(): string {
+        let platform = process.platform;
+        switch (platform) {
+            case 'win32': return process.env['APPDATA'] || path.join(process.env['USERPROFILE'], 'AppData', 'Roaming');
+            case 'darwin': return path.join(os.homedir(), 'Library', 'Application Support');
+            case 'linux': return process.env['XDG_CONFIG_HOME'] || path.join(os.homedir(), '.config');
+            default: throw new Error('Platform not supported');
+        }
+    }
+
+    private getDefaultLogLocation(): string {
+        return path.join(this.getAppDataPath(), 'code');
     }
 }
