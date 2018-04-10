@@ -316,7 +316,7 @@
                 "description": "%pgsql.connection.sslcompression%"
               },
               "sslcert": {
-                "type": "boolean",
+                "type": "string",
                 "default": "{{put-sslcert-here}}",
                 "description": "%pgsql.connection.sslcert%"
               },

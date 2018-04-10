@@ -13,6 +13,17 @@ export class ConnectionCredentials implements IConnectionCredentials {
     public user: string;
     public password: string;
     public port: number;
+    public hostaddr: string;
+    public clientEncoding: string;
+    public options: string;
+    public sslmode: string;
+    public sslcompression: boolean;
+    public sslcert: string;
+    public sslkey: string;
+    public sslrootcert: string;
+    public sslcrl: string;
+    public requirepeer: string;
+    public service: string;
     public authenticationType: string;
     public encrypt: boolean;
     public trustServerCertificate: boolean;

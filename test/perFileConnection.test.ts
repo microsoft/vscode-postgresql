@@ -66,7 +66,18 @@ function createTestCredentials(): IConnectionCredentials {
         multipleActiveResultSets:       false,
         packetSize:                     8192,
         typeSystemVersion:              'Latest',
-        connectionString:               ''
+        connectionString:               '',
+        hostaddr:                       '',
+        clientEncoding:                 '',
+        options:                        '',
+        sslmode:                        'prefer',
+        sslcompression:                 false,
+        sslcert:                        '',
+        sslkey:                         '',
+        sslrootcert:                    '',
+        sslcrl:                         '',
+        requirepeer:                    '',
+        service:                        ''
     };
     return creds;
 }
