@@ -333,8 +333,8 @@ export default class ConnectionManager {
             connection.errorNumber = result.errorNumber;
             connection.errorMessage = result.errorMessage;
         } else {
-            PlatformInformation.GetCurrent().then( platformInfo => {
-                if (!platformInfo.isWindows() && result.errorMessage && result.errorMessage.includes('Kerberos')) {
+            PlatformInformation.getCurrent().then( platformInfo => {
+                if (!platformInfo.isWindows && result.errorMessage && result.errorMessage.includes('Kerberos')) {
                     this.vscodeWrapper.showErrorMessage(
                         Utils.formatString(LocalizedConstants.msgConnectionError2, result.errorMessage),
                         LocalizedConstants.macOpenSslHelpButton)

@@ -19,6 +19,10 @@ let fse = require('fs-extra');
 */
 export default class ServiceDownloadProvider {
 
+    // Todo: Remove this before going public
+    private static TOKEN: string = 'sv=2017-07-29&ss=bfqt&srt=sco&sp=rwdlacup&se=2018-06-10T01:35:43Z&st=2018-03-30T17:35:43Z&spr'
+                                       + '=https&sig=Dpta%2F9KURSkq%2Bf7zT3wsCc18xyGvAdGuOr1GrS6GLZQ%3D';
+
     constructor(private _config: IConfig,
                 private _logger: ILogger,
                 private _statusView: IStatusView,
@@ -82,6 +86,7 @@ export default class ServiceDownloadProvider {
         let version = this._config.getSqlToolsPackageVersion();
         baseDownloadUrl = baseDownloadUrl.replace('{#version#}', version);
         baseDownloadUrl = baseDownloadUrl.replace('{#fileName#}', fileName);
+        baseDownloadUrl = baseDownloadUrl.replace('{#token#}', ServiceDownloadProvider.TOKEN);
         return baseDownloadUrl;
     }
 

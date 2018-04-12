@@ -31,7 +31,7 @@ export namespace Telemetry {
             return Promise.resolve(platformInformation);
         } else {
             return new Promise<PlatformInformation>(resolve => {
-                PlatformInformation.GetCurrent().then(info => {
+                PlatformInformation.getCurrent().then(info => {
                     platformInformation = info;
                     resolve(platformInformation);
                 });

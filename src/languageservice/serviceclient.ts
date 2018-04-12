@@ -23,11 +23,12 @@ import ServiceDownloadProvider from './serviceDownloadProvider';
 import DecompressProvider from './decompressProvider';
 import HttpClient from './httpClient';
 import ExtConfig from  '../configurations/extConfig';
-import {PlatformInformation} from '../models/platform';
+import {PlatformInformation, getRuntimeDisplayName} from '../models/platform';
 import {ServerInitializationResult, ServerStatusView} from './serverStatus';
 import StatusView from '../views/statusView';
 import * as LanguageServiceContracts from '../models/contracts/languageService';
 import { IConfig } from '../languageservice/interfaces';
+
 let vscode = require('vscode');
 let opener = require('opener');
 
@@ -155,7 +156,7 @@ export default class SqlToolsServiceClient {
     public initialize(context: ExtensionContext): Promise<ServerInitializationResult> {
          this._logger.appendLine(Constants.serviceInitializing);
 
-         return PlatformInformation.GetCurrent().then( platformInfo => {
+         return PlatformInformation.getCurrent().then( platformInfo => {
             return this.initializeForPlatform(platformInfo, context);
          });
     }
@@ -164,29 +165,31 @@ export default class SqlToolsServiceClient {
          return new Promise<ServerInitializationResult>( (resolve, reject) => {
             this._logger.appendLine(Constants.commandsNotAvailableWhileInstallingTheService);
             this._logger.appendLine();
-            this._logger.append(`Platform: ${platformInfo.toString()}`);
-            if (!platformInfo.isValidRuntime()) {
+            this._logger.append(`Platform-------------: ${platformInfo.toString()}`);
+            if (!platformInfo.isValidRuntime) {
+                this._logger.appendLine();
+                this._logger.append('Platform invalid');
                 Utils.showErrorMsg(Constants.unsupportedPlatformErrorMessage);
                 Telemetry.sendTelemetryEvent('UnsupportedPlatform', {platform: platformInfo.toString()} );
                 reject('Invalid Platform');
             } else {
                 if (platformInfo.runtimeId) {
-                    this._logger.appendLine(` (${platformInfo.getRuntimeDisplayName()})`);
+                    this._logger.appendLine(` (${getRuntimeDisplayName(platformInfo.runtimeId)})`);
                 } else {
                     this._logger.appendLine();
                 }
                 this._logger.appendLine();
 
-                // For macOS we need to ensure the tools service version is set appropriately
-                this.updateServiceVersion(platformInfo);
-
                 this._server.getServerPath(platformInfo.runtimeId).then(serverPath => {
+                    this._logger.appendLine();
+                    this._logger.append('Platform invalid');
                     if (serverPath === undefined) {
                         // Check if the service already installed and if not open the output channel to show the logs
                         if (_channel !== undefined) {
                             _channel.show();
                         }
                         this._server.downloadServerFiles(platformInfo.runtimeId).then ( installedServerPath => {
+                            Utils.showErrorMsg('Download completed');
                             this.initializeLanguageClient(installedServerPath, context);
                             resolve(new ServerInitializationResult(true, true, installedServerPath));
                         }).catch(downloadErr => {
@@ -206,12 +209,6 @@ export default class SqlToolsServiceClient {
         });
     }
 
-    private updateServiceVersion(platformInfo: PlatformInformation): void {
-        if (platformInfo.isMacOS() && platformInfo.isMacVersionLessThan('10.12.0')) {
-            // Version 1.0 is required as this is the last one supporting downlevel macOS versions
-            this._config.useServiceVersion(1);
-        }
-    }
 
     /**
      * Gets the known service version of the backing tools service. This can be useful for filtering

@@ -294,3 +294,9 @@ export interface ILogger {
     append(message?: string): void;
     appendLine(message?: string): void;
 }
+
+export const enum ErrorCodes {
+    ERR_PLATFORM_NOT_SUPPORTED,
+    ERR_DISTRIBUTION_NOT_SUPPORTED,
+    ERR_ARCHITECTURE_NOT_SUPPORTED
+}
