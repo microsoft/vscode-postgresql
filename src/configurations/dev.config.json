@@ -1,6 +1,6 @@
 {
     "service": {
-        "downloadUrl": "http://dtnuget:8080/download/pgtoolsservice/{#version#}/pgsqltoolsservice-{#fileName#}",
+        "downloadUrl": "https://pgtoolservice.file.core.windows.net/download/pgsqltoolsservice-{#fileName#}?{#token#}",
         "version": "1.2.0-alpha.22",
         "downloadFileNames": {
             "Windows_64": "win-x64.zip",
