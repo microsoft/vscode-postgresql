@@ -56,12 +56,24 @@ export class ConnectionCredentials implements IConnectionCredentials {
 
         details.options['host'] = credentials.host;
         if (credentials.port && details.options['host'].indexOf(',') === -1) {
-            // Port is appended to the server name in a connection string
-            details.options['host'] += (',' + credentials.port);
+            details.options['port'] = credentials.port;
         }
         details.options['dbname'] = credentials.dbname;
         details.options['user'] = credentials.user;
         details.options['password'] = credentials.password;
+        details.options['hostaddr'] = credentials.hostaddr;
+        details.options['connectTimeout'] = credentials.connectTimeout;
+        details.options['clientEncoding'] = credentials.clientEncoding;
+        details.options['options'] = credentials.options;
+        details.options['applicationName'] = credentials.applicationName;
+        details.options['sslmode'] = credentials.sslmode;
+        details.options['sslcompression'] = credentials.sslcompression;
+        details.options['sslcert'] = credentials.sslcert;
+        details.options['sslkey'] = credentials.sslkey;
+        details.options['sslrootcert'] = credentials.sslrootcert;
+        details.options['sslcrl'] = credentials.sslcrl;
+        details.options['requirepeer'] = credentials.requirepeer;
+        details.options['service'] = credentials.service;
 
         return details;
     }

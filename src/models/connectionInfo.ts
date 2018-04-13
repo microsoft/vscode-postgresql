@@ -54,12 +54,57 @@ export function fixupConnectionCredentials(connCreds: Interfaces.IConnectionCred
             connCreds.connectTimeout = Constants.azureSqlDbConnectionTimeout;
         }
     }
+
+    if (!connCreds.hostaddr) {
+        connCreds.hostaddr = '';
+    }
+
+    if (!connCreds.options) {
+        connCreds.options = '';
+    }
+
+    if (!connCreds.sslmode) {
+        connCreds.sslmode = 'prefer';
+    }
+
+    if (!connCreds.clientEncoding) {
+        connCreds.clientEncoding = '';
+    }
+
+    if (!connCreds.sslcompression) {
+        connCreds.sslcompression = true;
+    }
+
+    if (!connCreds.sslcert) {
+        connCreds.sslcert = '';
+    }
+
+    if (!connCreds.sslkey) {
+        connCreds.sslkey = '';
+    }
+
+    if (!connCreds.sslrootcert) {
+        connCreds.sslrootcert = '';
+    }
+
+    if (!connCreds.sslcrl) {
+        connCreds.sslcrl = '';
+    }
+
+    if (!connCreds.requirepeer) {
+        connCreds.requirepeer = '';
+    }
+
+    if (!connCreds.service) {
+        connCreds.service = undefined;
+    }
+
     return connCreds;
 }
 
-// return true if server name ends with '.database.windows.net'
+// return true if server name ends with '.postgres.database.azure.com'
 function isAzureDatabase(server: string): boolean {
-    return (server ? server.endsWith(Constants.sqlDbPrefix) : false);
+    return (server ? server.endsWith(Constants.postgresDbPrefix) : false);
 }
 
 /**
