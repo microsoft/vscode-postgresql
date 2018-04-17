@@ -55,12 +55,12 @@ export interface IConnectionCredentials {
     /**
      * server name
      */
-    server: string;
+    host: string;
 
     /**
      * database name
      */
-    database: string;
+    dbname: string;
 
     /**
      * user name
@@ -76,6 +76,61 @@ export interface IConnectionCredentials {
      * The port number to connect to.
      */
     port: number;
+
+    /**
+     * Host IP address to connect to
+     */
+    hostaddr: string;
+
+    /**
+     * Client encoding used for connection
+     */
+    clientEncoding: string;
+
+    /**
+     * command line options provided while connecting
+     */
+    options: string;
+
+    /**
+     * SSL Mode used while connecting
+     */
+    sslmode: string;
+
+    /**
+     * whether to use SSL compression while connecting
+     */
+    sslcompression: boolean;
+
+    /**
+     * filename of the SSL certificate to use
+     */
+    sslcert: string;
+
+    /**
+     * filename of the key to use for the SSL certificate
+     */
+    sslkey: string;
+
+    /**
+     * SSL root certificate filename
+     */
+    sslrootcert: string;
+
+    /**
+     * The filename of the SSL certificate revocation list to use
+     */
+    sslcrl: string;
+
+    /**
+     * The required username of the server process
+     */
+    requirepeer: string;
+
+    /**
+     * The service name in pg_service.conf to use for connection parameters
+     */
+    service: string;
 
     /**
      * Gets or sets the authentication to use.

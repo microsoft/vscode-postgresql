@@ -77,8 +77,8 @@ export class ConnectionConfig implements IConnectionConfig {
 
         if (profiles.length > 0) {
             profiles = profiles.filter(conn => {
-                // filter any connection missing a connection string and server name or the sample that's shown by default
-                return conn.connectionString || !!(conn.server) && conn.server !== LocalizedConstants.SampleServerName;
+                // filter any connection missing a connection string and server name with sample that's shown by default
+                return conn.connectionString || conn.host !== LocalizedConstants.SampleServerName;
             });
         }
 

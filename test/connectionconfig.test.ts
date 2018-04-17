@@ -14,15 +14,15 @@ import * as stubs from './stubs';
 
 let connections: ConnectionProfile[] = [
     Object.assign(new ConnectionProfile(), {
-        server: 'my-server',
-        database: 'my_db',
+        host: 'my-server',
+        dbname: 'my_db',
         authenticationType: utils.authTypeToString(interfaces.AuthenticationTypes.SqlLogin),
         user: 'sa',
         password: '12345678'
     }),
     Object.assign(new ConnectionProfile(), {
-        server: 'my-other-server',
-        database: 'my_other_db',
+        host: 'my-other-server',
+        dbname: 'my_other_db',
         user: 'sa',
         password: 'qwertyuiop',
         authenticationType: utils.authTypeToString(interfaces.AuthenticationTypes.SqlLogin)
@@ -47,12 +47,12 @@ suite('ConnectionConfig tests', () => {
 
         // Verify that the profiles were read correctly
         assert.strictEqual(profiles.length, 2);
-        assert.strictEqual(profiles[0].server, 'my-server');
-        assert.strictEqual(profiles[0].database, 'my_db');
+        assert.strictEqual(profiles[0].host, 'my-server');
+        assert.strictEqual(profiles[0].dbname, 'my_db');
         assert.strictEqual(profiles[0].user, 'sa');
         assert.strictEqual(profiles[0].password, '12345678');
-        assert.strictEqual(profiles[1].server, 'my-other-server');
-        assert.strictEqual(profiles[1].database, 'my_other_db');
+        assert.strictEqual(profiles[1].host, 'my-other-server');
+        assert.strictEqual(profiles[1].dbname, 'my_other_db');
         assert.strictEqual(profiles[1].user, 'sa');
         assert.strictEqual(profiles[1].password, 'qwertyuiop');
 
@@ -67,8 +67,8 @@ suite('ConnectionConfig tests', () => {
         let configResult: {[key: string]: any} = {};
         configResult[Constants.connectionsArrayName] = connections;
         let resourceProfile = {
-            server: 'testpc',
-            database: 'testdb',
+            host: 'testpc',
+            dbname: 'testdb',
             user: 'testuser',
             password: 'abcd',
             authenticationType: 'SqlLogin',

@@ -229,8 +229,8 @@ export function isSameProfile(currentProfile: interfaces.IConnectionProfile, exp
         // If either profile uses connection strings, compare them directly
         return currentProfile.connectionString === expectedProfile.connectionString;
     }
-    return expectedProfile.server === currentProfile.server
-        && isSameDatabase(expectedProfile.database, currentProfile.database)
+    return expectedProfile.host === currentProfile.host
+        && isSameDatabase(expectedProfile.dbname, currentProfile.dbname)
         && isSameAuthenticationType(expectedProfile.authenticationType, currentProfile.authenticationType)
         && ((isEmpty(expectedProfile.user) && isEmpty(currentProfile.user)) || expectedProfile.user === currentProfile.user);
 }
@@ -246,8 +246,8 @@ export function isSameProfile(currentProfile: interfaces.IConnectionProfile, exp
  */
 export function isSameConnection(conn: interfaces.IConnectionCredentials, expectedConn: interfaces.IConnectionCredentials): boolean {
     return (conn.connectionString || expectedConn.connectionString) ? conn.connectionString === expectedConn.connectionString :
-        expectedConn.server === conn.server
-        && isSameDatabase(expectedConn.database, conn.database)
+        expectedConn.host === conn.host
+        && isSameDatabase(expectedConn.dbname, conn.dbname)
         && isSameAuthenticationType(expectedConn.authenticationType, conn.authenticationType)
         && expectedConn.user === conn.user;
 }

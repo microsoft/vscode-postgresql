@@ -54,7 +54,7 @@ export class ConnectionStore {
         if (itemType) {
             itemTypeString = CredentialsQuickPickItemType[itemType];
         }
-        return ConnectionStore.formatCredentialId(creds.server, creds.database, creds.user, itemTypeString);
+        return ConnectionStore.formatCredentialId(creds.host, creds.dbname, creds.user, itemTypeString);
     }
 
     /**
@@ -305,7 +305,7 @@ export class ConnectionStore {
         return new Promise<boolean>((resolve, reject) => {
             if (Utils.isNotEmpty(conn.password)) {
                 let credType: string = type === CredentialsQuickPickItemType.Mru ? ConnectionStore.CRED_MRU_USER : ConnectionStore.CRED_PROFILE_USER;
-                let credentialId = ConnectionStore.formatCredentialId(conn.server, conn.database, conn.user, credType);
+                let credentialId = ConnectionStore.formatCredentialId(conn.host, conn.dbname, conn.user, credType);
                 self._credentialStore.saveCredential(credentialId, conn.password)
                 .then((result) => {
                     resolve(result);
@@ -347,7 +347,7 @@ export class ConnectionStore {
         }).then(profileFound => {
             // Now remove password from credential store. Currently do not care about status unless an error occurred
             if (profile.savePassword === true && !keepCredentialStore) {
-                let credentialId = ConnectionStore.formatCredentialId(profile.server, profile.database, profile.user, ConnectionStore.CRED_PROFILE_USER);
+                let credentialId = ConnectionStore.formatCredentialId(profile.host, profile.dbname, profile.user, ConnectionStore.CRED_PROFILE_USER);
                 self._credentialStore.deleteCredential(credentialId).then(undefined, rejected => {
                     throw new Error(rejected);
                 });
@@ -431,7 +431,7 @@ export class ConnectionStore {
         if (configValues) {
             for (let index = 0; index < configValues.length; index++) {
                 let element = configValues[index];
-                if (element.server && element.server.trim() && !element.server.trim().startsWith('{{')) {
+                if (element.host && element.host.trim() && !element.host.trim().startsWith('{{')) {
                     let connection = ConnInfo.fixupConnectionCredentials(element);
                     connections.push(connection);
                 } else {

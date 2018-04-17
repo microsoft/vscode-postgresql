@@ -15,8 +15,8 @@ import assert = require('assert');
 
 function createTestCredentials(): IConnectionCredentials {
     const creds: IConnectionCredentials = {
-        server:                         'my-server',
-        database:                       'my_db',
+        host:                           'my-server',
+        dbname:                         'my_db',
         user:                           'sa',
         password:                       '12345678',
         port:                           1234,
@@ -42,7 +42,18 @@ function createTestCredentials(): IConnectionCredentials {
         multipleActiveResultSets:       false,
         packetSize:                     8192,
         typeSystemVersion:              'Latest',
-        connectionString:               ''
+        connectionString:               '',
+        hostaddr:                       '',
+        clientEncoding:                 '',
+        options:                        '',
+        sslmode:                        'prefer',
+        sslcompression:                 false,
+        sslcert:                        '',
+        sslkey:                         '',
+        sslrootcert:                    '',
+        sslcrl:                         '',
+        requirepeer:                    '',
+        service:                        ''
     };
     return creds;
 }
@@ -95,7 +106,7 @@ suite('Connection Profile tests', () => {
     test('Port number is applied to server name when connection credentials are transformed into details', () => {
         // Given a connection credentials object with server and a port
         let creds = new ConnectionCredentials();
-        creds.server = 'my-server';
+        creds.host = 'my-server';
         creds.port = 1234;
 
         // When credentials are transformed into a details contract

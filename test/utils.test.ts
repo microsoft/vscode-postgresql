@@ -42,14 +42,14 @@ suite('Utility Tests - isSameConnection', () => {
     let authType = Constants.sqlAuthentication;
     let user = 'my-user';
     let connection1 = Object.assign(new ConnectionCredentials(), {
-        server: server,
-        database: database,
+        host: server,
+        dbname: database,
         authenticationType: authType,
         user: user
     });
     let connection2 = Object.assign(new ConnectionCredentials(), {
-        server: server,
-        database: database,
+        host: server,
+        dbname: database,
         authenticationType: authType,
         user: user
     });
@@ -66,7 +66,7 @@ suite('Utility Tests - isSameConnection', () => {
     });
 
     test('should return false for non-matching non-connectionstring connections', () => {
-        connection2.server = 'some-other-server';
+        connection2.host = 'some-other-server';
         expect(Utils.isSameConnection(connection1, connection2)).to.equal(false);
     });
 

@@ -216,7 +216,7 @@ export class ConnectionUI {
                 if (newCredentials['profileName']) {
                     delete newCredentials['profileName'];
                 }
-                newCredentials.database = name;
+                newCredentials.dbname = name;
 
                 return <Interfaces.IConnectionCredentialsQuickPickItem> {
                     label: name,

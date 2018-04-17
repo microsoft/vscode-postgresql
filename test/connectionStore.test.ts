@@ -28,8 +28,8 @@ suite('ConnectionStore tests', () => {
     setup(() => {
         defaultNamedProfile = Object.assign(new ConnectionProfile(), {
             profileName: 'defaultNamedProfile',
-            server: 'namedServer',
-            database: 'bcd',
+            host: 'namedServer',
+            dbname: 'bcd',
             authenticationType: utils.authTypeToString(interfaces.AuthenticationTypes.SqlLogin),
             user: 'cde',
             password: 'asdf!@#$'
@@ -37,8 +37,8 @@ suite('ConnectionStore tests', () => {
 
         defaultUnnamedProfile = Object.assign(new ConnectionProfile(), {
             profileName: undefined,
-            server: 'unnamedServer',
-            database: undefined,
+            host: 'unnamedServer',
+            dbname: undefined,
             authenticationType: utils.authTypeToString(interfaces.AuthenticationTypes.SqlLogin),
             user: 'aUser',
             password: 'asdf!@#$'
@@ -89,20 +89,20 @@ suite('ConnectionStore tests', () => {
     test('getPickListLabel lists server name by default', () => {
         let unnamedProfile = Object.assign(new ConnectionProfile(), {
             profileName: undefined,
-            server: 'serverName',
-            database: 'bcd',
+            host: 'serverName',
+            dbname: 'bcd',
             user: 'cde',
             password: 'asdf!@#$'
         });
         let label = connectionInfo.getPicklistLabel(unnamedProfile, interfaces.CredentialsQuickPickItemType.Profile);
-        assert.ok(label.endsWith(unnamedProfile.server));
+        assert.ok(label.endsWith(unnamedProfile.host));
     });
 
     test('getPickListLabel includes profile name if defined', () => {
         let namedProfile = Object.assign(new ConnectionProfile(), {
             profileName: 'profile name',
-            server: 'serverName',
-            database: 'bcd',
+            host: 'serverName',
+            dbname: 'bcd',
             user: 'cde',
             password: 'asdf!@#$'
         });
@@ -158,7 +158,7 @@ suite('ConnectionStore tests', () => {
         })
         .returns(() => Promise.resolve(true));
 
-        let expectedCredFormat: string = ConnectionStore.formatCredentialId(defaultNamedProfile.server, defaultNamedProfile.database, defaultNamedProfile.user);
+        let expectedCredFormat: string = ConnectionStore.formatCredentialId(defaultNamedProfile.host, defaultNamedProfile.dbname, defaultNamedProfile.user);
 
         let connectionStore = new ConnectionStore(context.object, credentialStore.object, connectionConfig.object);
 
@@ -183,7 +183,7 @@ suite('ConnectionStore tests', () => {
         // Given have 2 profiles
         let profile = Object.assign(new ConnectionProfile(), defaultNamedProfile, {
             profileName: 'otherServer-bcd-cde',
-            server: 'otherServer',
+            host: 'otherServer',
             savePassword: true
         });
         connectionConfig.setup(x => x.removeConnection(TypeMoq.It.isAny())).returns(p => Promise.resolve(p));
@@ -197,7 +197,7 @@ suite('ConnectionStore tests', () => {
             })
             .returns(() => Promise.resolve(true));
 
-        let expectedCredFormat: string = ConnectionStore.formatCredentialId(profile.server, profile.database, profile.user);
+        let expectedCredFormat: string = ConnectionStore.formatCredentialId(profile.host, profile.dbname, profile.user);
 
         globalstate.setup(x => x.update(TypeMoq.It.isAnyString(), TypeMoq.It.isAny())).returns(() => Promise.resolve());
         let connectionStore = new ConnectionStore(context.object, credentialStore.object, connectionConfig.object);
@@ -227,7 +227,7 @@ suite('ConnectionStore tests', () => {
         // Given have 2 profiles
         let profile = Object.assign(new ConnectionProfile(), defaultNamedProfile, {
             profileName: 'otherServer-bcd-cde',
-            server: 'otherServer',
+            host: 'otherServer',
             savePassword: true
         });
         connectionConfig.setup(x => x.removeConnection(TypeMoq.It.isAny())).returns(p => Promise.resolve(p));
@@ -256,7 +256,7 @@ suite('ConnectionStore tests', () => {
         // Given have 2 profiles
         let unnamedProfile = Object.assign(new ConnectionProfile(), defaultNamedProfile, {
             profileName: undefined,
-            server: 'otherServer',
+            host: 'otherServer',
             savePassword: true
         });
         let namedProfile = Object.assign(new ConnectionProfile(), unnamedProfile, {
@@ -295,7 +295,7 @@ suite('ConnectionStore tests', () => {
         // Given have 2 profiles
         let unnamedProfile = Object.assign(new ConnectionProfile(), defaultNamedProfile, {
             profileName: undefined,
-            server: 'otherServer',
+            host: 'otherServer',
             savePassword: true
         });
         let namedProfile = Object.assign(new ConnectionProfile(), unnamedProfile, {
@@ -374,7 +374,7 @@ suite('ConnectionStore tests', () => {
                 } else {
                     assert.equal(creds.length, maxRecent, `expect only top ${maxRecent} creds to be saved`);
                 }
-                assert.equal(creds[0].server, cred.server, 'Expect most recently saved item to be first in list');
+                assert.equal(creds[0].host, cred.host, 'Expect most recently saved item to be first in list');
                 assert.ok(utils.isEmpty(creds[0].password));
             });
         }
@@ -416,7 +416,7 @@ suite('ConnectionStore tests', () => {
             return connectionStore.addRecentlyUsed(cred);
         }).then(() => {
             assert.equal(creds.length, 2, 'expect 2 unique credentials to have been added');
-            assert.equal(creds[0].server, cred.server, 'Expect most recently saved item to be first in list');
+            assert.equal(creds[0].host, cred.host, 'Expect most recently saved item to be first in list');
             assert.ok(utils.isEmpty(creds[0].password));
         }).then(() => done(), err => done(err));
     });
@@ -445,14 +445,14 @@ suite('ConnectionStore tests', () => {
         // Given we save 1 connection with password and multiple other connections without
         let connectionStore = new ConnectionStore(context.object, credentialStore.object, undefined, vscodeWrapper.object);
         let integratedCred = Object.assign({}, defaultNamedProfile, {
-            server: defaultNamedProfile.server + 'Integrated',
+            server: defaultNamedProfile.host + 'Integrated',
             authenticationType: interfaces.AuthenticationTypes[interfaces.AuthenticationTypes.Integrated],
             user: '',
             password: '',
             profileName: 'integrated'
         });
         let noPwdCred = Object.assign({}, defaultNamedProfile, {
-            server: defaultNamedProfile.server + 'NoPwd',
+            server: defaultNamedProfile.host + 'NoPwd',
             password: '',
             profileName: 'noPwd'
         });
@@ -492,7 +492,7 @@ suite('ConnectionStore tests', () => {
         // Given 3 items in MRU and 2 in Profile list
         let recentlyUsed: interfaces.IConnectionCredentials[] = [];
         for (let i = 0; i < 3; i++) {
-            recentlyUsed.push( Object.assign({}, defaultNamedProfile, { server: defaultNamedProfile.server + i}) );
+            recentlyUsed.push( Object.assign({}, defaultNamedProfile, { host: defaultNamedProfile.host + i}) );
         }
         globalstate.setup(x => x.get(Constants.configRecentConnections)).returns(key => recentlyUsed);
 
@@ -535,7 +535,7 @@ suite('ConnectionStore tests', () => {
         // Given 3 items in MRU
         let recentlyUsed: interfaces.IConnectionCredentials[] = [];
         for (let i = 0; i < 3; i++) {
-            recentlyUsed.push( Object.assign({}, defaultNamedProfile, { server: defaultNamedProfile.server + i}) );
+            recentlyUsed.push( Object.assign({}, defaultNamedProfile, { server: defaultNamedProfile.host + i}) );
         }
         globalstate.setup(x => x.get(Constants.configRecentConnections)).returns(key => recentlyUsed);
         globalstate.setup(x => x.update(TypeMoq.It.isAny(), TypeMoq.It.isAny()))
@@ -566,8 +566,8 @@ suite('ConnectionStore tests', () => {
         // Given a profile with emptyPasswordInput set
         let passwordAlreadySetProfile = Object.assign(new ConnectionProfile(), {
             profileName: 'defaultNamedProfile',
-            server: 'namedServer',
-            database: 'bcd',
+            host: 'namedServer',
+            dbname: 'bcd',
             authenticationType: utils.authTypeToString(interfaces.AuthenticationTypes.SqlLogin),
             user: 'cde',
             password: 'asdf!@#$'
@@ -586,8 +586,8 @@ suite('ConnectionStore tests', () => {
         // Given a profile with emptyPasswordInput set
         let emptyPasswordProfile = Object.assign(new ConnectionProfile(), {
             profileName: 'defaultNamedProfile',
-            server: 'namedServer',
-            database: 'bcd',
+            host: 'namedServer',
+            dbname: 'bcd',
             authenticationType: utils.authTypeToString(interfaces.AuthenticationTypes.SqlLogin),
             user: 'cde',
             password: '',

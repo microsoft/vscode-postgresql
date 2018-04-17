@@ -15,12 +15,12 @@ import * as Utils from './utils';
  * @returns {Interfaces.IConnectionCredentials} the updated connection
  */
 export function fixupConnectionCredentials(connCreds: Interfaces.IConnectionCredentials): Interfaces.IConnectionCredentials {
-    if (!connCreds.server) {
-        connCreds.server = '';
+    if (!connCreds.host) {
+        connCreds.host = '';
     }
 
-    if (!connCreds.database) {
-        connCreds.database = '';
+    if (!connCreds.dbname) {
+        connCreds.dbname = '';
     }
 
     if (!connCreds.user) {
@@ -45,7 +45,7 @@ export function fixupConnectionCredentials(connCreds: Interfaces.IConnectionCred
         connCreds.applicationName = Constants.connectionApplicationName;
     }
 
-    if (isAzureDatabase(connCreds.server)) {
+    if (isAzureDatabase(connCreds.host)) {
         // always encrypt connection if connecting to Azure SQL
         connCreds.encrypt = true;
 
@@ -54,12 +54,57 @@ export function fixupConnectionCredentials(connCreds: Interfaces.IConnectionCred
             connCreds.connectTimeout = Constants.azureSqlDbConnectionTimeout;
         }
     }
+
+    if (!connCreds.hostaddr) {
+        connCreds.hostaddr = '';
+    }
+
+    if (!connCreds.options) {
+        connCreds.options = '';
+    }
+
+    if (!connCreds.sslmode) {
+        connCreds.sslmode = 'prefer';
+    }
+
+    if (!connCreds.clientEncoding) {
+        connCreds.clientEncoding = '';
+    }
+
+    if (!connCreds.sslcompression) {
+        connCreds.sslcompression = true;
+    }
+
+    if (!connCreds.sslcert) {
+        connCreds.sslcert = '';
+    }
+
+    if (!connCreds.sslkey) {
+        connCreds.sslkey = '';
+    }
+
+    if (!connCreds.sslrootcert) {
+        connCreds.sslrootcert = '';
+    }
+
+    if (!connCreds.sslcrl) {
+        connCreds.sslcrl = '';
+    }
+
+    if (!connCreds.requirepeer) {
+        connCreds.requirepeer = '';
+    }
+
+    if (!connCreds.service) {
+        connCreds.service = undefined;
+    }
+
     return connCreds;
 }
 
-// return true if server name ends with '.database.windows.net'
+// return true if server name ends with '.postgres.database.azure.com'
 function isAzureDatabase(server: string): boolean {
-    return (server ? server.endsWith(Constants.sqlDbPrefix) : false);
+    return (server ? server.endsWith(Constants.postgresDbPrefix) : false);
 }
 
 /**
@@ -76,7 +121,7 @@ export function getPicklistLabel(connCreds: Interfaces.IConnectionCredentials, i
     if (profile.profileName) {
         return profile.profileName;
     } else {
-        return connCreds.server ? connCreds.server : connCreds.connectionString;
+        return connCreds.host ? connCreds.host : connCreds.connectionString;
     }
 }
 
@@ -124,9 +169,9 @@ export function getConnectionDisplayString(creds: Interfaces.IConnectionCredenti
             text = creds.connectionString;
         }
     } else {
-        text = creds.server;
-        if (creds.database !== '') {
-            text = appendIfNotEmpty(text, creds.database);
+        text = creds.host;
+        if (creds.dbname !== '') {
+            text = appendIfNotEmpty(text, creds.dbname);
         } else {
             text = appendIfNotEmpty(text, LocalizedConstants.defaultDatabaseLabel);
         }
@@ -180,8 +225,8 @@ export function getUserNameOrDomainLogin(creds: Interfaces.IConnectionCredential
 export function getTooltip(connCreds: Interfaces.IConnectionCredentials, serverInfo?: ConnectionContracts.ServerInfo): string {
     let tooltip: string =
            connCreds.connectionString ? 'Connection string: ' + connCreds.connectionString + '\r\n' :
-           ('Server name: ' + connCreds.server + '\r\n' +
-           'Database name: ' + (connCreds.database ? connCreds.database : '<connection default>') + '\r\n' +
+           ('Server name: ' + connCreds.host + '\r\n' +
+           'Database name: ' + (connCreds.dbname ? connCreds.dbname : '<connection default>') + '\r\n' +
            'Login name: ' + connCreds.user + '\r\n' +
            'Connection encryption: ' + (connCreds.encrypt ? 'Encrypted' : 'Not encrypted') + '\r\n');
     if (serverInfo && serverInfo.serverVersion) {

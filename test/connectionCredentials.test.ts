@@ -202,10 +202,10 @@ suite('ConnectionCredentials Tests', () => {
     // A connection string can be set alongside other properties for createConnectionDetails
     test('createConnectionDetails sets properties in addition to the connection string', () => {
         let credentials = new ConnectionCredentials();
-        credentials.database = 'some-db';
+        credentials.dbname = 'some-db';
 
         let connectionDetails = ConnectionCredentials.createConnectionDetails(credentials);
-        assert.equal(connectionDetails.options.dbname, credentials.database);
+        assert.equal(connectionDetails.options.dbname, credentials.dbname);
     });
 
     test('Server question properly handles connection strings', () => {
@@ -218,11 +218,11 @@ suite('ConnectionCredentials Tests', () => {
 
         // Verify that the question updated the connection string
         assert.equal(credentials.connectionString, connectionString);
-        assert.notEqual(credentials.server, connectionString);
+        assert.notEqual(credentials.host, connectionString);
 
         let serverName = 'some-server';
         serverQuestion.onAnswered(serverName);
-        assert.equal(credentials.server, serverName);
+        assert.equal(credentials.host, serverName);
         assert.notEqual(credentials.connectionString, serverName);
     });
 });

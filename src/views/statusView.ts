@@ -141,11 +141,11 @@ export default class StatusView implements vscode.Disposable {
         bar.statusConnection.command = Constants.cmdConnect;
         bar.statusConnection.text = LocalizedConstants.connectErrorLabel;
         if (error.errorNumber && error.errorMessage && !Utils.isEmpty(error.errorMessage)) {
-            bar.statusConnection.tooltip = LocalizedConstants.connectErrorTooltip + credentials.server + '\n' +
+            bar.statusConnection.tooltip = LocalizedConstants.connectErrorTooltip + credentials.host + '\n' +
                                         LocalizedConstants.connectErrorCode + error.errorNumber + '\n' +
                                         LocalizedConstants.connectErrorMessage + error.errorMessage;
         } else {
-            bar.statusConnection.tooltip = LocalizedConstants.connectErrorTooltip + credentials.server + '\n' +
+            bar.statusConnection.tooltip = LocalizedConstants.connectErrorTooltip + credentials.host + '\n' +
                                         LocalizedConstants.connectErrorMessage + error.messages;
         }
         this.showStatusBarItem(fileUri, bar.statusConnection);
