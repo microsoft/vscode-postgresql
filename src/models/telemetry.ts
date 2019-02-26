@@ -8,7 +8,7 @@ export namespace Telemetry {
     let reporter: TelemetryReporter;
     let userId: string;
     let platformInformation: PlatformInformation;
-    let disabled: boolean;
+    let disabled: boolean = true; // Disable telemetry for public preview
 
     // Get the unique ID for the current user of the extension
     function getUserId(): Promise<string> {
@@ -60,7 +60,7 @@ export namespace Telemetry {
     export function initialize(context: vscode.ExtensionContext): void {
         if (typeof reporter === 'undefined') {
             // Check if the user has opted out of telemetry
-            if (!vscode.workspace.getConfiguration('telemetry').get<boolean>('enableTelemetry', true)) {
+            if (!vscode.workspace.getConfiguration('telemetry').get<boolean>('enableTelemetry', false)) {
                 disable();
                 return;
             }
