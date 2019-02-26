@@ -244,10 +244,10 @@ export default class QueryRunner {
         const self = this;
         let queryDetails = new QueryExecuteSubsetParams();
         queryDetails.ownerUri = this.uri;
-        queryDetails.resultSetIndex = resultSetIndex;
-        queryDetails.rowsCount = numberOfRows;
-        queryDetails.rowsStartIndex = rowStart;
-        queryDetails.batchIndex = batchIndex;
+        queryDetails.resultSetIndex = parseInt(resultSetIndex.toString(), 10);
+        queryDetails.rowsCount = parseInt(numberOfRows.toString(), 10);
+        queryDetails.rowsStartIndex = parseInt(rowStart.toString(), 10);
+        queryDetails.batchIndex = parseInt(batchIndex.toString(), 10);
         return new Promise<QueryExecuteSubsetResult>((resolve, reject) => {
             self._client.sendRequest(QueryExecuteSubsetRequest.type, queryDetails).then(result => {
                 resolve(result);
