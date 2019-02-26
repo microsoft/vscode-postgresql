@@ -147,7 +147,6 @@ gulp.task('html:vendor', (done) => {
 
     // copy source maps
     gulp.src([
-        // config.paths.html.root + '/node_modules/es6-shim/es6-shim.map',
         config.paths.html.root + '/node_modules/reflect-metadata/Reflect.js.map',
         config.paths.html.root + '/node_modules/systemjs/dist/system-polyfills.js.map',
         config.paths.html.root + '/node_modules/systemjs-plugin-json/json.js'
