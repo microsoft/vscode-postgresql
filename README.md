@@ -1,5 +1,34 @@
+# PostgreSQL for Visual Studio Code
 
-# Contributing
+Welcome to PostgreSQL for Visual Studio Code! An extension for developing PostgreSQL with functionalities including:
+
+* Connect to PostgreSQL instances
+* Manage connection profiles
+* Connect to a different Postgres instance or database in each tab
+* View object DDL with 'Go to Definition' and 'Peek Definition'
+* Run queries and save results as JSON, csv, or Excel
+
+
+## Quickstart
+
+Open the Command Palette (Ctrl + Shift + P).
+
+Search and select 'PostgreSQL: New Query'
+
+In the command palette, select 'Create Connection Profile'
+
+Follow the prompts to enter your Postgres instance's hostname, database, username, and password.
+
+You are now connected to your Postgres database. [You can confirm this via the Status Bar (the ribbon at the bottom of the VS Code window). It will show your connected hostname, database, and user.]
+
+You can type a query like 'SELECT * FROM pg_stat_activity';
+
+Right-click, select 'Execute Query' and the results will show in a new window.
+
+You can save the query results to JSON, csv or Excel.
+
+
+## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
