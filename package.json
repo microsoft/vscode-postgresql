@@ -1,11 +1,11 @@
 {
-  "name": "postgresql",
-  "displayName": "postgresql",
-  "version": "0.0.1",
-  "description": "Develop PostgreSQL everywhere",
+  "name": "vscode-postgresql",
+  "displayName": "PostgreSQL",
+  "version": "0.1.0",
+  "description": "Develop Postgres everywhere",
   "publisher": "ms-ossdata",
   "preview": true,
-  "license": "",
+  "license": "MIT",
   "aiKey": "AIF-5574968e-856d-40d2-af67-c89a14e76412",
   "icon": "images/extension-icon.png",
   "galleryBanner": {
