@@ -51,7 +51,7 @@ This extension is [licensed under the MIT License]. Please see the [third-party 
 [feature suggestion]:https://github.com/Microsoft/vscode-postgresql/issues/new
 [developer documentation]:https://github.com/Microsoft/vscode-mssql/wiki/contributing
 [Microsoft Enterprise and Developer Privacy Statement]:https://go.microsoft.com/fwlink/?LinkId=786907&lang=en7
-[licensed under the MIT License]: https://github.com/Microsoft/vscode-postgresql/blob/master/LICENSE.txt
+[licensed under the MIT License]: https://github.com/Microsoft/vscode-postgresql/blob/master/LICENSE
 [third-party notices]: https://github.com/Microsoft/vscode-postgresql/blob/master/ThirdPartyNotices.txt
 [Microsoft Open Source Code of Conduct]:https://opensource.microsoft.com/codeofconduct/
 [Code of Conduct FAQ]:https://opensource.microsoft.com/codeofconduct/faq/
