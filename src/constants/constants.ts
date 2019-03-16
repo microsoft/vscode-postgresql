@@ -1,6 +1,7 @@
 // Collection of Non-localizable Constants
 export const languageId = 'sql';
 export const extensionName = 'pgsql';
+export const extensionDisplayName = 'PostgreSQL';
 export const extensionConfigSectionName = 'pgsql';
 export const pgsqlProviderName = 'PGSQL';
 export const noneProviderName = 'None';
@@ -52,11 +53,11 @@ export const renamedOpenTimeThreshold = 10.0;
 export const timeToWaitForLanguageModeChange = 10000.0;
 
 // TODO: Update these
-export const macOpenSslHelpLink = 'https://github.com/Microsoft/vscode-pgsql/wiki/OpenSSL-Configuration';
-export const gettingStartedGuideLink = 'https://github.com/Microsoft/vscode-pgsql/blob/master/README.md';
-export const releaseNotesLink = 'https://github.com/Microsoft/vscode-pgsql/blob/master/CHANGELOG.md';
+export const macOpenSslHelpLink = 'https://github.com/Microsoft/vscode-postgresql/wiki/OpenSSL-Configuration';
+export const gettingStartedGuideLink = 'https://github.com/Microsoft/vscode-postgresql/blob/master/README.md';
+export const releaseNotesLink = 'https://github.com/Microsoft/vscode-postgresql/blob/master/CHANGELOG.md';
 export const integratedAuthHelpLink = 'https://aka.ms/vscode-pgsql-integratedauth';
-export const sqlToolsServiceCrashLink = 'https://github.com/Microsoft/vscode-pgsql/wiki/SqlToolsService-Known-Issues';
+export const sqlToolsServiceCrashLink = 'https://github.com/Microsoft/vscode-postgresql/wiki/SqlToolsService-Known-Issues';
 
 export const localizedTexts = 'localizedTexts';
 
@@ -82,19 +83,19 @@ export const extConfigResultFontSize = 'resultsFontSize';
 export const configApplyLocalization = 'applyLocalization';
 
 // ToolsService Constants
-export const serviceInstallingTo = 'Installing SQL tools service to';
+export const serviceInstallingTo = 'Installing PostgreSQL tools service to';
 export const serviceInstalling = 'Installing';
 export const serviceDownloading = 'Downloading';
-export const serviceInstalled = 'Sql Tools Service installed';
-export const serviceInstallationFailed = 'Failed to install Sql Tools Service';
-export const sqlToolsServiceCrashMessage = 'SQL Tools Service component could not start.';
+export const serviceInstalled = 'PostgreSQL Tools Service installed';
+export const serviceInstallationFailed = 'Failed to install PostgreSQL Tools Service';
+export const sqlToolsServiceCrashMessage = 'PostgreSQL Tools Service component could not start.';
 export const sqlToolsServiceCrashButton = 'View Known Issues';
 export const serviceInitializingOutputChannelName = 'SqlToolsService Initialization';
-export const serviceInitializing = 'Initializing SQL tools service for the pgsql extension.';
-export const commandsNotAvailableWhileInstallingTheService = 'Note: pgsql commands will be available after installing the service.';
+export const serviceInitializing = 'Initializing PostgreSQL tools service for the PostgreSQL extension.';
+export const commandsNotAvailableWhileInstallingTheService = 'Note: PostgreSQL commands will be available after installing the service.';
 export const unsupportedPlatformErrorMessage = 'The platform is not supported';
-export const serviceLoadingFailed = 'Failed to load Sql Tools Service';
-export const invalidServiceFilePath = 'Invalid file path for Sql Tools Service';
+export const serviceLoadingFailed = 'Failed to load PostgreSQL Tools Service';
+export const invalidServiceFilePath = 'Invalid file path for PostgreSQL Tools Service';
 export const sqlToolsServiceName = 'SQLToolsService';
 export const serviceNotCompatibleError = 'Client is not compatible with the service layer';
 export const sqlToolsServiceConfigKey = 'service';

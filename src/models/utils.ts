@@ -134,17 +134,17 @@ export function logDebug(msg: any): void {
 
 // Helper to show an info message
 export function showInfoMsg(msg: string): void {
-    vscode.window.showInformationMessage(Constants.extensionName + ': ' + msg );
+    vscode.window.showInformationMessage(Constants.extensionDisplayName + ': ' + msg );
 }
 
 // Helper to show an warn message
 export function showWarnMsg(msg: string): void {
-    vscode.window.showWarningMessage(Constants.extensionName + ': ' + msg );
+    vscode.window.showWarningMessage(Constants.extensionDisplayName + ': ' + msg );
 }
 
 // Helper to show an error message
 export function showErrorMsg(msg: string): void {
-    vscode.window.showErrorMessage(Constants.extensionName + ': ' + msg );
+    vscode.window.showErrorMessage(Constants.extensionDisplayName + ': ' + msg );
 }
 
 export function isEmpty(str: any): boolean {

@@ -218,14 +218,14 @@ export default class VscodeWrapper {
      * Formats and shows a vscode error message
      */
     public showErrorMessage(msg: string, ...items: string[]): Thenable<string> {
-        return vscode.window.showErrorMessage(Constants.extensionName + ': ' + msg, ...items);
+        return vscode.window.showErrorMessage(Constants.extensionDisplayName + ': ' + msg, ...items);
     }
 
     /**
      * Formats and shows a vscode information message
      */
     public showInformationMessage(msg: string, ...items: string[]): Thenable<string> {
-        return vscode.window.showInformationMessage(Constants.extensionName + ': ' + msg, ...items);
+        return vscode.window.showInformationMessage(Constants.extensionDisplayName + ': ' + msg, ...items);
     }
 
     /**
@@ -267,7 +267,7 @@ export default class VscodeWrapper {
      * Formats and shows a vscode warning message
      */
     public showWarningMessage(msg: string): Thenable<string> {
-        return vscode.window.showWarningMessage(Constants.extensionName + ': ' + msg );
+        return vscode.window.showWarningMessage(Constants.extensionDisplayName + ': ' + msg );
     }
 
     /**
