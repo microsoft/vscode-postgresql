@@ -31,7 +31,8 @@
     "SQL",
     "PGSQL",
     "PG",
-    "PosgreSQL"
+    "PosgreSQL",
+    "Postgres"
   ],
   "activationEvents": [
     "onLanguage:sql",
