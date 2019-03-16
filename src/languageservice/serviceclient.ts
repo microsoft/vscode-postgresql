@@ -182,14 +182,13 @@ export default class SqlToolsServiceClient {
 
                 this._server.getServerPath(platformInfo.runtimeId).then(serverPath => {
                     this._logger.appendLine();
-                    this._logger.append('Platform invalid');
                     if (serverPath === undefined) {
                         // Check if the service already installed and if not open the output channel to show the logs
                         if (_channel !== undefined) {
                             _channel.show();
                         }
                         this._server.downloadServerFiles(platformInfo.runtimeId).then ( installedServerPath => {
-                            Utils.showErrorMsg('Download completed');
+                            Utils.showInfoMsg('Download completed');
                             this.initializeLanguageClient(installedServerPath, context);
                             resolve(new ServerInitializationResult(true, true, installedServerPath));
                         }).catch(downloadErr => {
