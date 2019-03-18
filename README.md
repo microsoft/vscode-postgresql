@@ -9,6 +9,7 @@ Welcome to PostgreSQL for Visual Studio Code! An extension for developing Postgr
 * Write queries with IntelliSense
 * Run queries and save results as JSON, csv, or Excel
 
+Install link: https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-postgresql 
 
 ## Quickstart
 
