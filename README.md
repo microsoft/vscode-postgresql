@@ -17,7 +17,7 @@ Welcome to PostgreSQL for Visual Studio Code! An extension for developing Postgr
 
 3) In the command palette, select 'Create Connection Profile'. Follow the prompts to enter your Postgres instance's hostname, database, username, and password.
 
-You are now connected to your Postgres database. [You can confirm this via the Status Bar (the ribbon at the bottom of the VS Code window). It will show your connected hostname, database, and user.]
+You are now connected to your Postgres database. You can confirm this via the Status Bar (the ribbon at the bottom of the VS Code window). It will show your connected hostname, database, and user.
 
 4) You can type a query like 'SELECT * FROM pg_stat_activity';
 
