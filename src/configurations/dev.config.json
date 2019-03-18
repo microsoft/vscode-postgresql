@@ -1,7 +1,7 @@
 {
     "service": {
-        "downloadUrl": "https://pgtoolservice.file.core.windows.net/download/pgsqltoolsservice-{#fileName#}?{#token#}",
-        "version": "1.2.0-alpha.22",
+        "downloadUrl": "https://github.com/Microsoft/pgtoolsservice/releases/download/{#version#}/pgsqltoolsservice-{#fileName#}",
+        "version": "v1.0.0",
         "downloadFileNames": {
             "Windows_64": "win-x64.zip",
             "Windows_86": "win-x86.zip",
