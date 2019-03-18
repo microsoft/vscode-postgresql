@@ -6,6 +6,7 @@ Welcome to PostgreSQL for Visual Studio Code! An extension for developing Postgr
 * Manage connection profiles
 * Connect to a different Postgres instance or database in each tab
 * View object DDL with 'Go to Definition' and 'Peek Definition'
+* Write queries with IntelliSense
 * Run queries and save results as JSON, csv, or Excel
 
 
