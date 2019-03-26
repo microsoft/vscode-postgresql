@@ -53,6 +53,8 @@ function getRuntimeIdLinux(distributionName: string, distributionVersion: string
             return Runtime.RHEL_7;
         case 'debian':
             return Runtime.Debian_8;
+        case 'arch':
+            return Runtime.Arch;
         case 'galliumos':
             if (distributionVersion.startsWith('2.0')) {
                 return Runtime.Ubuntu_16;
@@ -135,6 +137,7 @@ export enum Runtime {
     RHEL_7 = <any>'Linux_64',
     Ubuntu_14 = <any>'Linux_64',
     Ubuntu_16 = <any>'Linux_64',
+    Arch = <any>'Linux_64',
     Linux_64 = <any>'Linux_64',
     Linux_86 = <any>'Linux_64'
 }
@@ -162,6 +165,8 @@ export function getRuntimeDisplayName(runtime: Runtime): string {
         case Runtime.Ubuntu_14:
             return 'Linux';
         case Runtime.Ubuntu_16:
+            return 'Linux';
+        case Runtime.Arch:
             return 'Linux';
         case Runtime.Linux_64:
             return 'Linux';
