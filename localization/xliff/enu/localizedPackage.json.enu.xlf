@@ -119,6 +119,9 @@
         <trans-unit id="pgsql.intelliSense.lowerCaseSuggestions">
             <source xml:lang="en">Should IntelliSense suggestions be lowercase</source>
         </trans-unit>
+        <trans-unit id="pgsql.persistQueryResultTabs">
+            <source xml:lang="en">Should query result selections and scroll positions be saved when switching tabs (may impact performance)</source>
+        </trans-unit>
     </body>
   </file>
 </xliff>

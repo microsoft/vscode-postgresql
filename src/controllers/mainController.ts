@@ -143,7 +143,7 @@ export default class MainController implements vscode.Disposable {
         // initialize language service client
         return new Promise<boolean>( (resolve, reject) => {
                 // Initialize telemetry
-                Telemetry.initialize(self._context);
+                Telemetry.disable();
 
                 SqlToolsServerClient.instance.initialize(self._context).then(serverResult => {
 
@@ -155,13 +155,9 @@ export default class MainController implements vscode.Disposable {
 
                 // Init content provider for results pane
                 self._outputContentProvider = new SqlOutputContentProvider(self._context, self._statusview);
-                let registration = vscode.workspace.registerTextDocumentContentProvider(SqlOutputContentProvider.providerName, self._outputContentProvider);
-                self._context.subscriptions.push(registration);
 
                 // Init connection manager and connection MRU
                 self._connectionMgr = new ConnectionManager(self._context, self._statusview, self._prompter);
-
-
 
                 activationTimer.end();
 
@@ -529,7 +525,9 @@ export default class MainController implements vscode.Disposable {
         } catch (err) {
             try {
                 // write out the "first launch" file if it doesn't exist
-                fs.writeFile(filePath, 'launched');
+                fs.writeFile(filePath, 'launched', (err) => {
+                    return;
+                });
             } catch (err) {
                 // ignore errors writing first launch file since there isn't really
                 // anything we can do to recover in this situation.

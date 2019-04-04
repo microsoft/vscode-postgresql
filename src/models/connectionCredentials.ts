@@ -157,6 +157,7 @@ export class ConnectionCredentials implements IConnectionCredentials {
                 message: LocalizedConstants.usernamePrompt,
                 placeHolder: LocalizedConstants.usernamePlaceholder,
                 default: defaultProfileValues ? defaultProfileValues.user : undefined,
+                shouldPrompt: (answers) => !connectionStringSet() && ConnectionCredentials.shouldPromptForUser(credentials),
                 validate: (value) => ConnectionCredentials.validateRequiredString(LocalizedConstants.usernamePrompt, value),
                 onAnswered: (value) => credentials.user = value
             },
@@ -179,9 +180,27 @@ export class ConnectionCredentials implements IConnectionCredentials {
                         (<IConnectionProfile>credentials).emptyPasswordInput = utils.isEmpty(credentials.password);
                     }
                 }
+            },
+            // Port
+            {
+                type: QuestionTypes.input,
+                name: LocalizedConstants.portPrompt,
+                message: LocalizedConstants.portPrompt,
+                placeHolder: LocalizedConstants.portPlaceHolder,
+                default: '5432',
+                shouldPrompt: (answers) => !connectionStringSet() && ConnectionCredentials.shouldPromptForPort(credentials),
+                onAnswered: (value) => credentials.port = value
             }
         ];
         return questions;
+    }
+
+    private static shouldPromptForUser(credentials: IConnectionCredentials): boolean {
+        return utils.isEmpty(credentials.user) && ConnectionCredentials.isPasswordBasedCredential(credentials);
+    }
+
+    private static shouldPromptForPort(credentials: IConnectionCredentials): boolean {
+        return utils.isEmpty(credentials.port);
     }
 
     // Detect if a given value is a server name or a connection string, and assign the result accordingly

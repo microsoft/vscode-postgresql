@@ -98,6 +98,12 @@
         <trans-unit id="usernamePrompt">
             <source xml:lang="en">User name</source>
         </trans-unit>
+        <trans-unit id="portPrompt">
+            <source xml:lang="en">Port</source>
+        </trans-unit>
+        <trans-unit id="portPlaceHolder">
+            <source xml:lang="en">Port number</source>
+        </trans-unit>
         <trans-unit id="usernamePlaceholder">
             <source xml:lang="en">User name (PGSQL Login)</source>
         </trans-unit>

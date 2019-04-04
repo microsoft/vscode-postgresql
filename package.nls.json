@@ -50,5 +50,6 @@
 "pgsql.intelliSense.enableErrorChecking":"Should IntelliSense error checking be enabled",
 "pgsql.intelliSense.enableSuggestions":"Should IntelliSense suggestions be enabled",
 "pgsql.intelliSense.enableQuickInfo":"Should IntelliSense quick info be enabled",
-"pgsql.intelliSense.lowerCaseSuggestions":"Should IntelliSense suggestions be lowercase"
+"pgsql.intelliSense.lowerCaseSuggestions":"Should IntelliSense suggestions be lowercase",
+"pgsql.persistQueryResultTabs":"Should query result selections and scroll positions be saved when switching tabs (may impact performance)"
 }
