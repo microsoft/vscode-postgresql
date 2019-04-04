@@ -17,6 +17,8 @@ class TestPrompter implements IPrompter {
 
 // Bare mock of the extension context for vscode
 class TestExtensionContext implements vscode.ExtensionContext {
+    globalStoragePath: string;
+    logPath: string;
     subscriptions: { dispose(): any }[];
     workspaceState: vscode.Memento;
     globalState: vscode.Memento;
@@ -35,6 +37,7 @@ class TestTextEditor implements vscode.TextEditor {
     selections: vscode.Selection[];
     options: vscode.TextEditorOptions;
     viewColumn: vscode.ViewColumn;
+    visibleRanges: vscode.Range[];
 
     edit(callback: (editBuilder: vscode.TextEditorEdit) => void): Thenable<boolean> { return undefined; };
     setDecorations(decorationType: vscode.TextEditorDecorationType, rangesOrOptions: vscode.Range[] | vscode.DecorationOptions[]): void { return undefined; };

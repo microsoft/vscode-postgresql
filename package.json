@@ -1,7 +1,7 @@
 {
   "name": "vscode-postgresql",
   "displayName": "PostgreSQL",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Develop Postgres everywhere",
   "publisher": "ms-ossdata",
   "preview": true,
@@ -21,10 +21,10 @@
   },
   "homepage": "https://github.com/Microsoft/vscode-postgresql/blob/master/README.md",
   "engines": {
-    "vscode": "^1.17.0"
+    "vscode": "^1.23.0"
   },
   "categories": [
-    "Languages",
+    "Programming Languages",
     "Azure"
   ],
   "keywords": [
@@ -103,8 +103,8 @@
     "figures": "^1.4.0",
     "fs-extra-promise": "^0.3.1",
     "getmac": "1.2.1",
-    "http-proxy-agent": "^1.0.0",
-    "https-proxy-agent": "^1.0.0",
+    "http-proxy-agent": "^2.1.0",
+    "https-proxy-agent": "^2.2.1",
     "jsonc-parser": "^1.0.0",
     "opener": "1.4.2",
     "plist": "^2.1.0",
@@ -114,7 +114,7 @@
     "tmp": "^0.0.28",
     "underscore": "^1.8.3",
     "vscode-extension-telemetry": "^0.0.5",
-    "vscode-languageclient": "^2.5.0",
+    "vscode-languageclient": "^3.5.1",
     "vscode-nls": "^2.0.2",
     "ws": "^1.1.1"
   },
@@ -525,6 +525,12 @@
           "type": "boolean",
           "default": false,
           "description": "%pgsql.intelliSense.lowerCaseSuggestions%",
+          "scope": "window"
+        },
+        "pgsql.persistQueryResultTabs": {
+          "type": "boolean",
+          "default": false,
+          "description": "%pgsql.persistQueryResultTabs%",
           "scope": "window"
         }
       }
