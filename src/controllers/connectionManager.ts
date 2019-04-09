@@ -333,7 +333,7 @@ export default class ConnectionManager {
             connection.errorNumber = result.errorNumber;
             connection.errorMessage = result.errorMessage;
         } else {
-            PlatformInformation.getCurrent().then( platformInfo => {
+            PlatformInformation.GetCurrent().then( platformInfo => {
                 if (!platformInfo.isWindows && result.errorMessage && result.errorMessage.includes('Kerberos')) {
                     this.vscodeWrapper.showErrorMessage(
                         Utils.formatString(LocalizedConstants.msgConnectionError2, result.errorMessage),
@@ -343,7 +343,7 @@ export default class ConnectionManager {
                             opener(Constants.integratedAuthHelpLink);
                         }
                      });
-                } else if (platformInfo.runtimeId === Runtime.OSX &&
+                } else if (platformInfo.runtimeId === Runtime.OSX_10_11_64  &&
                 result.messages.indexOf('Unable to load DLL \'System.Security.Cryptography.Native\'') !== -1) {
                      this.vscodeWrapper.showErrorMessage(Utils.formatString(LocalizedConstants.msgConnectionError2,
                      LocalizedConstants.macOpenSslErrorMessage), LocalizedConstants.macOpenSslHelpButton).then(action => {
