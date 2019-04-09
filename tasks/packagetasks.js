@@ -60,9 +60,15 @@ gulp.task('package:offline', () => {
     var packageName = name + '-' + version;
 
     var packages = [];
-    packages.push({rid: 'win-x64', runtime: Runtime.Windows_64});
-    packages.push({rid: 'osx', runtime: Runtime.OSX});
-    packages.push({rid: 'linux-x64', runtime: Runtime.Linux_86});
+    packages.push({rid: 'win7-x64', runtime: Runtime.Windows_7_64});
+    packages.push({rid: 'osx.10.11-x64', runtime: Runtime.OSX_10_11_64});
+    packages.push({rid: 'centos.7-x64', runtime: Runtime.CentOS_7});
+    packages.push({rid: 'debian.8-x64', runtime: Runtime.Debian_8});
+    packages.push({rid: 'fedora.23-x64', runtime: Runtime.Fedora_23});
+    packages.push({rid: 'opensuse.13.2-x64', runtime:Runtime.OpenSUSE_13_2});
+    packages.push({rid: 'rhel.7.2-x64', runtime: Runtime.RHEL_7});
+    packages.push({rid: 'ubuntu.14.04-x64', runtime: Runtime.Ubuntu_14});
+    packages.push({rid: 'ubuntu.16.04-x64', runtime:  Runtime.Ubuntu_16});
 
     var promise = Promise.resolve();
     cleanServiceInstallFolder().then(() => {
