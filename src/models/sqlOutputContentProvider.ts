@@ -354,6 +354,8 @@ export class SqlOutputContentProvider {
                 enableScripts: true
             });
             this._resultsPanes.set(resultsUri, panel);
+            let _thisResultsPanes = this._resultsPanes;
+            panel.onDidDispose(() => _thisResultsPanes.delete(resultsUri));
         }
 
         // Update the results panel's content
