@@ -218,7 +218,8 @@ export class PlatformInformation {
                 throw new Error(`Unsupported Windows architecture: ${architecture}`);
 
             case 'darwin':
-                if (architecture === 'x86_64') {
+                if (architecture === 'x86_64' || architecture == 'arm64') {
+                    // arm64 will run the x64 OSS tools service emulated
                     // Note: We return the El Capitan RID for Sierra
                     return Runtime.OSX_10_11_64;
                 }
