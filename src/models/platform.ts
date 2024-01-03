@@ -18,7 +18,8 @@ export enum Runtime {
     UnknownVersion = <any>'Unknown',
     Windows_7_86 = <any>'Windows_7_86',
     Windows_7_64 = <any>'Windows_7_64',
-    OSX_10_11_64 = <any> 'OSX_10_11_64',
+    OSX_10_11_64 = <any>'OSX_10_11_64',
+    OSX_10_11_ARM = <any>'OSX_10_11_ARM',
     CentOS_7 = <any>'CentOS_7',
     Debian_8 = <any>'Debian_8',
     Fedora_23 = <any>'Fedora_23',
@@ -36,6 +37,7 @@ export function getRuntimeDisplayName(runtime: Runtime): string {
         case Runtime.Windows_7_86:
             return 'Windows';
         case Runtime.OSX_10_11_64:
+        case Runtime.OSX_10_11_ARM:
             return 'OSX';
         case Runtime.CentOS_7:
             return 'CentOS';
@@ -54,7 +56,7 @@ export function getRuntimeDisplayName(runtime: Runtime): string {
         case Runtime.Ubuntu_16:
             return 'Ubuntu16';
         default:
-        return 'Unknown';
+            return 'Unknown';
     }
 }
 
@@ -153,7 +155,7 @@ export class PlatformInformation {
                 throw new Error(`Unsupported platform: ${platform}`);
         }
 
-        return architecturePromise.then( arch => {
+        return architecturePromise.then(arch => {
             return distributionPromise.then(distro => {
                 return new PlatformInformation(platform, arch, distro);
             });
@@ -162,11 +164,11 @@ export class PlatformInformation {
 
     private static GetWindowsArchitecture(): Promise<string> {
         return new Promise<string>((resolve, reject) => {
-             if (process.env.PROCESSOR_ARCHITECTURE === 'x86' && process.env.PROCESSOR_ARCHITEW6432 === undefined) {
-                 resolve('x86');
-             } else {
-                 resolve('x86_64');
-             }
+            if (process.env.PROCESSOR_ARCHITECTURE === 'x86' && process.env.PROCESSOR_ARCHITEW6432 === undefined) {
+                resolve('x86');
+            } else {
+                resolve('x86_64');
+            }
         });
     }
 
@@ -218,11 +220,12 @@ export class PlatformInformation {
                 throw new Error(`Unsupported Windows architecture: ${architecture}`);
 
             case 'darwin':
-                if (architecture === 'x86_64') {
+                switch (architecture) {
                     // Note: We return the El Capitan RID for Sierra
-                    return Runtime.OSX_10_11_64;
+                    case 'x86_64': return Runtime.OSX_10_11_64;
+                    case 'arm64': return Runtime.OSX_10_11_ARM;
+                    default:
                 }
-
                 throw new Error(`Unsupported macOS architecture: ${architecture}`);
 
             case 'linux':
@@ -251,10 +254,10 @@ export class PlatformInformation {
 
                 // If we got here, this is not a Linux distro or architecture that we currently support.
                 throw new Error(`Unsupported Linux distro: ${distribution.name}, ${distribution.version}, ${architecture}`);
-            default :
-                 // If we got here, we've ended up with a platform we don't support  like 'freebsd' or 'sunos'.
-                 // Chances are, VS Code doesn't support these platforms either.
-                 throw Error('Unsupported platform ' + platform);
+            default:
+                // If we got here, we've ended up with a platform we don't support  like 'freebsd' or 'sunos'.
+                // Chances are, VS Code doesn't support these platforms either.
+                throw Error('Unsupported platform ' + platform);
         }
     }
 
