@@ -1,4 +1,3 @@
-import * as Slick from 'slickgrid';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { Component, Directive, Input, Output, EventEmitter } from '@angular/core';
 import { ISlickRange, IColumnDefinition, IObservableCollection, IGridDataRow } from 'angular2-slickgrid';

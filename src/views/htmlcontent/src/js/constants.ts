@@ -22,6 +22,6 @@ export let msgCannotSaveMultipleSelections = 'Save results command cannot be use
 
 export let loadLocalizedConstant = (key: string, value: string) => {
     // Update the value of the property with the name equal to key in this file
-    loadLocalizedConstant[key] = value;
+    this[key] = value;
 };
 
