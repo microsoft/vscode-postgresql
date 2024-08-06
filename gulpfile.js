@@ -3,7 +3,10 @@ var gulp = require('gulp');
 var rename = require('gulp-rename');
 var install = require('gulp-install');
 var tslint = require('gulp-tslint');
-var filter = require('gulp-filter');
+var filter;
+(async () => {
+    filter = await import('gulp-filter');
+})();
 var ts = require('gulp-typescript');
 var tsProject = ts.createProject('tsconfig.json');
 var del = require('del');

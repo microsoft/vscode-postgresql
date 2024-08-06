@@ -7,7 +7,7 @@ var del = require('del');
 var srcmap = require('gulp-sourcemaps');
 var config = require('./config');
 var uglifyjs = require('uglify-js');
-var minifier = require('gulp-uglify/minifier');
+var gulpUglify = require('gulp-uglify');
 var tsProject = ts.createProject(config.paths.html.root + '/tsconfig.json');
 var sysBuilder = require('systemjs-builder');
 var cleanCSS = require('gulp-clean-css');
@@ -70,7 +70,7 @@ gulp.task('html:bundle:app', (done) => {
 gulp.task('html:min-js', (done) => {
     if (min) {
         return gulp.src(config.paths.html.out + '/dist/js/app.min.js')
-                .pipe(minifier({mangle: false}, uglifyjs))
+                .pipe(gulpUglify({mangle: false}, uglifyjs))
                 .pipe(gulp.dest(config.paths.html.out + '/dist/js'));
     } else {
         done();
@@ -119,7 +119,7 @@ gulp.task('html:vendor', (done) => {
             config.paths.html.root + '/systemjs.config.js'
         ])
             .pipe(concat('vendors.min.js'))
-            .pipe(minifier({}, uglifyjs))
+            .pipe(gulpUglify({}, uglifyjs))
             .pipe(gulp.dest(config.paths.html.out + '/lib/js'));
     } else {
         gulp.src([
@@ -153,13 +153,13 @@ gulp.task('html:vendor', (done) => {
     ]).pipe(gulp.dest(config.paths.html.out + '/lib/js'));
 
     gulp.src([
-        config.paths.html.root + '/node_modules/angular2-slickgrid/components/css/SlickGrid.css',
+        config.paths.html.root + '/node_modules/angular2-slickgrid/out/css/SlickGrid.css',
         config.paths.html.root + '/node_modules/slickgrid/slick.grid.css'
     ]).pipe(gulp.dest(config.paths.html.out + '/lib/css'));
 
     gulp.src([
-        config.paths.html.root + '/node_modules/angular2-slickgrid/index.js',
-        config.paths.html.root + '/node_modules/angular2-slickgrid/components/**/*.js'
+        config.paths.html.root + '/node_modules/angular2-slickgrid/out/index.js',
+        config.paths.html.root + '/node_modules/angular2-slickgrid/out/**/*.js'
     ], { base: config.paths.html.root + '/node_modules/angular2-slickgrid' }).pipe(gulp.dest(config.paths.html.out + '/lib/js/angular2-slickgrid'));
 
     return gulp.src([config.paths.html.root + '/node_modules/@angular/**/*'])

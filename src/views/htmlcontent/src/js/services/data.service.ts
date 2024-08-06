@@ -3,7 +3,7 @@
  * Licensed under the MIT License. See License.txt in the project root for license information.
  * ------------------------------------------------------------------------------------------ */
 import {Injectable, Inject, forwardRef} from '@angular/core';
-import {Http, Headers} from '@angular/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable, Subject, Observer } from 'rxjs/Rx';
 
 import { ISlickRange } from 'angular2-slickgrid';
@@ -34,7 +34,7 @@ export class DataService {
         return this.ws;
     }
 
-    constructor(@Inject(forwardRef(() => Http)) private http) {
+    constructor(@Inject(forwardRef(() => HttpHeaders)) private http) {
         const self = this;
         // grab the uri from the document for requests
         this.uri = encodeURI(document.getElementById('uri') ? document.getElementById('uri').innerText.trim() : '');
@@ -96,7 +96,7 @@ export class DataService {
      */
     sendSaveRequest(batchIndex: number, resultSetNumber: number, format: string, selection: ISlickRange[]): void {
         const self = this;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         let url = '/saveResults?'
                         + '&uri=' + self.uri
                         + '&format=' + format
@@ -113,7 +113,7 @@ export class DataService {
      */
     getLocalizedTextsRequest():  Promise<{ [key: string]: any }> {
         const self = this;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         let url = '/localizedTexts';
 
         return new Promise<{ [key: string]: any }>((resolve, reject) => {
@@ -130,7 +130,7 @@ export class DataService {
      */
     openLink(content: string, columnName: string, linkType: string): void {
         const self = this;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         self.http.post('/openLink', JSON.stringify({ 'content': content , 'columnName': columnName, 'type': linkType}), { headers : headers })
             .subscribe(undefined, err => {
@@ -147,7 +147,7 @@ export class DataService {
      */
     copyResults(selection: ISlickRange[], batchId: number, resultId: number, includeHeaders?: boolean): void {
         const self = this;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         let url = '/copyResults?' + '&uri=' + self.uri + '&batchId=' + batchId + '&resultId=' + resultId;
         if (includeHeaders !== undefined) {
             url += '&includeHeaders=' + includeHeaders;
@@ -161,7 +161,7 @@ export class DataService {
      */
     set editorSelection(selection: ISelectionData) {
         const self = this;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         let url = '/setEditorSelection?' + '&uri=' + self.uri;
         self.http.post(url, selection, { headers: headers }).subscribe();
     }
@@ -172,14 +172,14 @@ export class DataService {
      */
     sendGetRequest(uri: string): void {
         const self = this;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         self.http.get(uri, {headers: headers}).subscribe();
     }
 
     showWarning(message: string): void {
         const self = this;
         let url = '/showWarning?' + '&uri=' + self.uri;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         self.http.post(url, JSON.stringify({ 'message': message }), { headers: headers }).subscribe();
     }
@@ -187,7 +187,7 @@ export class DataService {
     showError(message: string): void {
         const self = this;
         let url = '/showError?' + '&uri=' + self.uri;
-        let headers = new Headers();
+        let headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
         self.http.post(url, JSON.stringify({ 'message': message }), { headers: headers }).subscribe();
     }

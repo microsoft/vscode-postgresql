@@ -37,7 +37,6 @@ System.config({
     '@angular/compiler/testing': 'lib/js/@angular/compiler/bundles/compiler-testing.umd.js',
     '@angular/platform-browser/testing': 'lib/js/@angular/platform-browser/bundles/platform-browser-testing.umd.js',
     '@angular/platform-browser-dynamic/testing': 'lib/js/@angular/platform-browser-dynamic/bundles/platform-browser-dynamic-testing.umd.js',
-    '@angular/http/testing': 'lib/js/@angular/http/bundles/http-testing.umd.js',
     '@angular/router/testing': 'lib/js/@angular/router/bundles/router-testing.umd.js',
     '@angular/forms/testing': 'ib/js/@angular/forms/bundles/forms-testing.umd.js',
   },
