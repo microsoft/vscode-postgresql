@@ -1,6 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
-import { Http, BaseRequestOptions, RequestMethod, ResponseOptions, Response, Request } from '@angular/common/http';
-import { MockBackend, MockConnection } from '@angular/common/http/testing';
+import { Http, BaseRequestOptions, RequestMethod, ResponseOptions, Response, Request } from '@angular/http';
+import { MockBackend, MockConnection } from '@angular/http/testing';
 
 import { DataService } from './../src/js/services/data.service';
 import { IResultsConfig } from './../src/js/interfaces';
