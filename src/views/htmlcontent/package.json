@@ -23,13 +23,10 @@
     "slickgrid": "github:anthonydresser/SlickGrid#2.3.23",
     "systemjs": "0.19.40",
     "systemjs-plugin-json": "0.2.0",
-    "underscore": "1.8.3"
+    "underscore": "1.8.3",
+    "zone.js": "0.6.26"
   },
   "devDependencies": {
     "assert": "1.4.1"
-  },
-  "overrides": {
-    "rxjs": "5.0.0-rc.4",
-    "zone.js": "0.7.2"
   }
 }
