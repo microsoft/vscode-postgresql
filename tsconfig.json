@@ -8,7 +8,7 @@
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "rootDir": ".",
-        "typeRoots":["./typings", "./node_modules/@types"],
+        "typeRoots":["./typings"],
         "types": ["node"]
     },
     "exclude": [
