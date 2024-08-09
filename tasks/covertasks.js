@@ -4,6 +4,12 @@ var jeditor = require("gulp-json-editor");
 var istanbulReport = require('gulp-istanbul-report');
 var cproc = require('child_process');
 
+gulp.task('default', function(done) {
+    // You can specify tasks to run here, for example:
+    // gulp.series('cover:clean', 'cover:enable', 'cover:disable')(done);
+    done();
+});
+
 gulp.task('cover:clean', function (done) {
     return del('coverage', done);
 });
