@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This project is deprecated. The PostgreSQL extension for Visual Studio Code has moved to [PostgreSQL for VS Code](https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-pgsql). The new repository is located at [https://github.com/Microsoft/vscode-pgsql](https://github.com/Microsoft/vscode-pgsql).
+
 # PostgreSQL for Visual Studio Code
 
 Welcome to PostgreSQL for Visual Studio Code! An extension for developing PostgreSQL with functionalities including:
@@ -9,7 +12,7 @@ Welcome to PostgreSQL for Visual Studio Code! An extension for developing Postgr
 * Write queries with IntelliSense
 * Run queries and save results as JSON, csv, or Excel
 
-Install link: https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-postgresql 
+Install link: https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vscode-postgresql
 
 ## Quickstart
 
