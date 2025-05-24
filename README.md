@@ -20,7 +20,7 @@ Install link: https://marketplace.visualstudio.com/items?itemName=ms-ossdata.vsc
 
 2) Search and select 'PostgreSQL: New Query'
 
-3) In the command palette, select 'Create Connection Profile'. Follow the prompts to enter your Postgres instance's hostname, database, username, and password.
+3) In the command palette, select 'Manage Connection Profiles'. Follow the prompts to enter your Postgres instance's hostname, database, username, and password.
 
 You are now connected to your Postgres database. You can confirm this via the Status Bar (the ribbon at the bottom of the VS Code window). It will show your connected hostname, database, and user.
 
