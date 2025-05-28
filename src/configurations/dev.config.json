@@ -1,11 +1,12 @@
 {
     "service": {
         "downloadUrl": "https://github.com/Microsoft/pgtoolsservice/releases/download/{#version#}/pgsqltoolsservice-{#fileName#}",
-        "version": "v1.1.0",
+        "version": "v1.10.0",
         "downloadFileNames": {
             "Windows_7_86": "win-x86.zip",
             "Windows_7_64": "win-x64.zip",
             "OSX_10_11_64": "osx.tar.gz",
+            "OSX_10_11_ARM": "osx-arm64.tar.gz",
             "CentOS_7": "linux-x64.tar.gz",
             "Debian_8": "linux-x64.tar.gz",
             "Fedora_23": "linux-x64.tar.gz",
@@ -17,8 +18,8 @@
         },
         "installDir": "../pgsqltoolsservice/{#version#}/{#platform#}",
         "executableFiles": [
-            "pgsqltoolsservice/pgtoolsservice_main",
-            "pgsqltoolsservice/pgtoolsservice_main.exe"
+            "pgsqltoolsservice/ossdbtoolsservice_main",
+            "pgsqltoolsservice/ossdbtoolsservice_main.exe"
         ]
     }
 }
