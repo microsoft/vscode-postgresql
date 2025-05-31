@@ -1,7 +1,7 @@
 {
   "name": "vscode-postgresql",
   "displayName": "PostgreSQL",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Develop Postgres everywhere",
   "publisher": "ms-ossdata",
   "preview": true,
@@ -55,7 +55,7 @@
     "coveralls": "^2.11.15",
     "decache": "^4.1.0",
     "del": "^2.2.1",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "^4.0.2",
     "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^5.0.0",
@@ -85,7 +85,7 @@
     "tslint": "^3.14.0",
     "typemoq": "^1.7.0",
     "typescript": "2.3.4",
-    "uglify-js": "mishoo/UglifyJS2#harmony-v2.8.22",
+    "uglify-js": "2.8.22",
     "vscode": "^1.0.5",
     "vscode-nls-dev": "https://github.com/Raymondd/vscode-nls-dev/releases/download/2.0.2/build.tar.gz",
     "xmldom": "^0.1.27",
@@ -538,7 +538,7 @@
   },
   "scripts": {
     "postinstall": "node ./node_modules/vscode/bin/install",
-    "install-packages": "npm install github:gulpjs/gulp#4.0 && npm install gulp-install && gulp --gulpfile install.js install",
+    "install-packages": "npm install gulp && npm install gulp-install && gulp --gulpfile install.js install",
     "package": "gulp package:online"
   }
 }
