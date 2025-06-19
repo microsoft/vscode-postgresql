@@ -1,7 +1,7 @@
 {
   "name": "vscode-postgresql",
   "displayName": "PostgreSQL",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Develop Postgres everywhere",
   "publisher": "ms-ossdata",
   "preview": true,
@@ -51,11 +51,12 @@
     "vscode.sql"
   ],
   "devDependencies": {
+    "@types/node": "10.12.11",
     "chai": "^3.5.0",
     "coveralls": "^2.11.15",
     "decache": "^4.1.0",
     "del": "^2.2.1",
-    "gulp": "github:gulpjs/gulp#4.0",
+    "gulp": "github:gulpjs/gulp#v4.0.0",
     "gulp-clean-css": "^2.0.13",
     "gulp-concat": "^2.6.0",
     "gulp-filter": "^5.0.0",
@@ -87,7 +88,7 @@
     "typescript": "2.3.4",
     "uglify-js": "mishoo/UglifyJS2#harmony-v2.8.22",
     "vscode": "^1.0.5",
-    "vscode-nls-dev": "https://github.com/Raymondd/vscode-nls-dev/releases/download/2.0.2/build.tar.gz",
+    "vscode-nls-dev": "2.0.1",
     "xmldom": "^0.1.27",
     "yargs": "https://registry.npmjs.org/yargs/-/yargs-3.32.0.tgz"
   },
@@ -113,7 +114,7 @@
     "semver": "https://registry.npmjs.org/semver/-/semver-5.0.3.tgz",
     "tmp": "^0.0.28",
     "underscore": "^1.8.3",
-    "vscode-extension-telemetry": "^0.1.1",
+    "vscode-extension-telemetry": "^0.3.0",
     "vscode-languageclient": "^3.5.1",
     "vscode-nls": "^2.0.2",
     "ws": "^1.1.1"
@@ -537,8 +538,7 @@
     }
   },
   "scripts": {
-    "postinstall": "node ./node_modules/vscode/bin/install",
-    "install-packages": "npm install github:gulpjs/gulp#4.0 && npm install gulp-install && gulp --gulpfile install.js install",
+    "install-packages": "npm install github:gulpjs/gulp#v4.0.0 && npm install gulp-install && gulp --gulpfile install.js install",
     "package": "gulp package:online"
   }
 }
